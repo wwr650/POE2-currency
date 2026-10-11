@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · PoE2 通货看板</title>
+  <script>window.__POE_API__ = "{{ api_prefix }}";</script>
+  <link rel="stylesheet" href="static/css/app.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='24' font-size='24'>⚗️</text></svg>">
+</head>
+<body data-page="{{ page }}">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">⚗</span>
+      <div>
+        <div class="brand-title">PoE2 通货看板</div>
+        <div class="brand-sub">poecurrency.top · 每小时快照</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="/" data-nav="dashboard">价格看板</a>
+      <a href="/trends" data-nav="trends">历史趋势</a>
+      <a href="/profit" data-nav="profit">收益分析</a>
+    </nav>
+    <div class="topbar-right">
+      <span class="badge badge-rate" id="rateBadge" title="当前汇率">1 d = — e</span>
+      <span class="badge" id="updatedBadge" title="最后更新时间">—</span>
+      <span class="badge" id="statusBadge" title="抓取状态">—</span>
+      <button class="btn btn-primary" id="refreshBtn" title="立即抓取一次最新数据">立即抓取</button>
+    </div>
+  </header>
+
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <span>数据来源：<a href="https://poecurrency.top" target="_blank" rel="noopener">poecurrency.top</a></span>
+    <span id="footNote">·</span>
+    <span>本工具仅供个人参考，交易风险自负。</span>
+  </footer>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script src="static/js/api.js"></script>
+  <script src="static/js/ui.js"></script>
+  <script src="static/js/charts.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

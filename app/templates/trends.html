@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="panel" style="margin-bottom:14px">
+  <div class="toolbar">
+    <span class="muted">时间窗</span>
+    <div class="unit-switch" id="windowSwitch">
+      <button data-hours="24">24 小时</button>
+      <button data-hours="168">7 天</button>
+      <button data-hours="720">30 天</button>
+      <button data-hours="8760">全部</button>
+    </div>
+    <label class="inline">分类
+      <select id="categorySelect"><option value="">全部分类</option></select>
+    </label>
+    <div class="spacer"></div>
+    <span class="muted">单位</span>
+    <div class="unit-switch" id="unitSwitch">
+      <button data-unit="d">d</button>
+      <button data-unit="e">e</button>
+      <button data-unit="source" title="使用数据源原始单位">源单位</button>
+    </div>
+    <button class="btn btn-sm" id="reloadBtn">刷新图表</button>
+  </div>
+</section>
+
+<section class="panel" style="margin-bottom:14px">
+  <div class="panel-head">汇率走势 <span class="muted" id="rateInfo" style="font-weight:400"></span></div>
+  <div class="panel-body"><div id="rateChart"></div></div>
+</section>
+
+<section class="panel" style="margin-bottom:14px">
+  <div class="panel-head">
+    道具价格走势
+    <span class="muted" style="font-weight:400">按住 Ctrl 可多选对比（最多 5 个）；每个道具两种颜色：左=买入，右=卖出</span>
+    <div class="spacer"></div>
+    <input type="search" id="itemFilter" placeholder="过滤：中文名/英文名/分类…" style="width:190px">
+    <button class="btn btn-sm" id="clearSelBtn" title="清空选择">清空</button>
+  </div>
+  <div class="panel-body">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start">
+      <div style="min-width:320px;max-width:420px">
+        <select id="itemSelect" multiple size="14" style="width:100%"></select>
+        <div class="muted" style="font-size:12px;margin-top:6px" id="itemHint">—</div>
+      </div>
+      <div style="flex:1;min-width:420px">
+        <div class="muted" style="font-size:12px;margin-bottom:6px" id="bsLegend"></div>
+        <div id="priceChart"></div>
+      </div>
+    </div>
+    <div id="statTableWrap" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head">快照历史 <span class="muted" style="font-weight:400">index.json</span>
+    <div class="spacer"></div><span class="muted" id="snapCount"></span></div>
+  <div class="panel-body" style="max-height:320px;overflow:auto">
+    <table class="grid"><thead><tr>
+      <th>抓取时间</th><th class="num">条目数</th><th class="num">异常</th><th class="num">汇率 d→e</th><th>文件</th>
+    </tr></thead><tbody id="snapBody"></tbody></table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="static/js/trends.js"></script>
+{% endblock %}

@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------- Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------------------------------------------------------------- 编辑器 / 系统
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ---------------------------------------------------------------- 用户数据（不上传）
+# 自定义道具
+data/custom_items.json
+data/custom_items.json.bak
+# 已保存的收益配置
+data/profit_configs.json
+data/profit_configs.json.bak
+
+# ---------------------------------------------------------------- 运行时产物（自动生成，不上传）
+data/prices.db
+data/prices.db-shm
+data/prices.db-wal
+data/index.json
+data/fetch_status.json
+data/summary.json
+data/logs/
+data/*.tmp
+summary.json.new

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="profit-layout">
+  <!-- ------------------------------------------------ 左：配置与自定义道具 -->
+  <div class="panel">
+    <div class="panel-head">已保存配置</div>
+    <div class="panel-body">
+      <div class="cfg-list" id="cfgList"><div class="muted">加载中…</div></div>
+    </div>
+    <div class="panel-head panel-head-stack">
+      <div class="ph-row">
+        <span>自定义道具</span>
+        <span class="muted" style="font-weight:400">custom_items.json</span>
+      </div>
+      <div class="ph-row">
+        <button class="btn btn-sm" id="backupExport" title="把自定义道具 / 收益配置导出为一个 JSON 备份文件">导出备份</button>
+        <button class="btn btn-sm" id="backupImport" title="从备份文件恢复（按 id 合并）">导入备份</button>
+        <input type="file" id="backupFile" accept=".json" style="display:none">
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="entry-list" id="customList"><div class="muted">加载中…</div></div>
+      <div class="section-title" style="margin-top:12px">新增自定义道具</div>
+      <div style="display:grid;gap:7px">
+        <input type="text" id="ciName" placeholder="名称（如：裂隙碎片）">
+        <div style="display:flex;gap:7px">
+          <input type="number" id="ciPrice" placeholder="单价" step="0.01" style="flex:1">
+          <select id="ciUnit"><option value="d">d</option><option value="e">e</option></select>
+          <button class="btn btn-sm" id="ciAdd">添加</button>
+        </div>
+        <input type="text" id="ciEng" placeholder="英文名（可选）">
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------ 中：配置区 -->
+  <div class="panel">
+    <div class="panel-head">
+      收益配置
+      <div class="spacer"></div>
+      <input type="text" id="cfgName" placeholder="配置名称，如：裂隙刷图" style="width:200px">
+      <button class="btn btn-sm btn-primary" id="saveBtn">保存</button>
+      <button class="btn btn-sm" id="newBtn">新建</button>
+      <button class="btn btn-sm" id="exportBtn">导出 JSON</button>
+      <button class="btn btn-sm" id="importLabel">导入 JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display:none">
+    </div>
+
+    <div class="toolbar">
+      <label class="inline">展示单位
+        <select id="displayUnit"><option value="d">d 神圣石</option><option value="e">e 崇高石</option></select>
+      </label>
+      <label class="inline">当前汇率 <span class="badge badge-rate" id="rateText">—</span></label>
+      <label class="inline">单次耗时 <input type="number" id="minutes" min="0" step="0.5" value="5" style="width:76px"> 分钟</label>
+      <div class="spacer"></div>
+      <span class="muted" id="calcState"></span>
+    </div>
+
+    <div class="panel-body">
+      <div class="section-title">
+        门票（成本）
+        <span class="muted" style="font-weight:400">从价格库选择道具，自动读取价格</span>
+        <div class="spacer"></div>
+        <div id="ticketPicker" class="picker-host"></div>
+        <button class="btn btn-sm" id="ticketAdd">＋ 添加门票</button>
+      </div>
+      <div class="entry-list" id="ticketList"></div>
+
+      <div class="section-title" style="margin-top:20px">
+        掉落（收益）
+        <span class="muted" style="font-weight:400">数量 × 概率，概率为 0~100%（支持小数）</span>
+        <div class="spacer"></div>
+        <div id="dropPicker" class="picker-host"></div>
+        <button class="btn btn-sm" id="dropAdd">＋ 添加掉落</button>
+        <button class="btn btn-sm custom-add" data-list="drops" title="手动输入名称与单价，不依赖价格库">＋ 自定义掉落</button>
+      </div>
+      <div class="entry-list" id="dropList"></div>
+
+      <div style="margin-top:18px;display:flex;justify-content:flex-end">
+        <button class="btn btn-sm btn-danger" id="clearEntriesBtn" title="清空当前门票与掉落">清空全部条目</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------ 右：结果 -->
+  <div class="panel profit-side-right">
+    <div class="panel-head">收益结果</div>
+    <div class="panel-body">
+      <div class="big-net" id="netBig"><span class="lbl">净收益</span>—</div>
+      <div class="sum-row"><span>门票总成本</span><span class="v" id="sumCost">—</span></div>
+      <div class="sum-row"><span>期望收益</span><span class="v" id="sumRevenue">—</span></div>
+      <div class="sum-row"><span>全掉落收益上限</span><span class="v" id="sumMax">—</span></div>
+      <div class="sum-row"><span>净收益</span><span class="v" id="sumNet">—</span></div>
+      <div class="sum-row"><span>ROI</span><span class="v" id="sumRoi">—</span></div>
+      <div class="sum-row"><span>每分钟收益</span><span class="v" id="sumPerMin">—</span></div>
+      <div class="sum-row"><span>每小时收益</span><span class="v" id="sumPerHour">—</span></div>
+      <ul class="warn-list" id="warnList"></ul>
+      <div class="section-title" style="margin-top:16px">明细</div>
+      <div id="detailTable" class="muted" style="font-size:12.5px">配置门票与掉落后显示明细</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="static/js/searchselect.js"></script>
+<script src="static/js/shared.js"></script>
+<script src="static/js/custom.js"></script>
+<script src="static/js/profit.js"></script>
+{% endblock %}

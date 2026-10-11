@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="cards" id="overviewCards">
+  <div class="card">
+    <div class="card-label">实时汇率</div>
+    <div class="card-value" id="cardRate">—</div>
+    <div class="card-sub" id="cardRateSub">1 神圣石 = ? 崇高石</div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-label">最后更新时间</div>
+    <div class="card-value small" id="cardUpdated">—</div>
+    <div class="card-sub" id="cardUpdatedSub">等待首次抓取</div>
+  </div>
+  <div class="card card-green">
+    <div class="card-label">抓取状态</div>
+    <div class="card-value small" id="cardStatus">—</div>
+    <div class="card-sub" id="cardStatusSub">调度间隔 1 小时</div>
+  </div>
+  <div class="card card-orange">
+    <div class="card-label">道具总数 / 异常</div>
+    <div class="card-value small" id="cardItems">—</div>
+    <div class="card-sub" id="cardItemsSub">数据源标记的异常条目</div>
+  </div>
+  <div class="card">
+    <div class="card-label">历史快照</div>
+    <div class="card-value small" id="cardSnaps">—</div>
+    <div class="card-sub">data/snapshots/ 累积</div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="tabs" id="categoryTabs"></div>
+  <div class="toolbar">
+    <input class="search" type="search" id="searchInput" placeholder="搜索中英文名 / 分类（如 神圣石、Divine、精华）">
+    <label class="inline"><input type="checkbox" id="errorOnly"> 仅异常</label>
+    <label class="inline">排序
+      <select id="sortSelect">
+        <option value="name">中文名</option>
+        <option value="engname">英文名</option>
+        <option value="category">分类</option>
+        <option value="buy">买入均价</option>
+        <option value="sell">卖出均价</option>
+        <option value="buy_ratio">买入涨跌幅</option>
+        <option value="sell_ratio">卖出涨跌幅</option>
+        <option value="latest">更新时间</option>
+      </select>
+    </label>
+    <label class="inline">方向
+      <select id="orderSelect">
+        <option value="desc">降序</option>
+        <option value="asc">升序</option>
+      </select>
+    </label>
+    <div class="spacer"></div>
+    <div class="unit-switch" id="unitSwitch" title="显示单位">
+      <button data-unit="d">以 d 显示</button>
+      <button data-unit="e">以 e 显示</button>
+    </div>
+    <label class="inline" title="每 60 秒自动刷新价格数据"><input type="checkbox" id="autoRefresh" checked> 自动刷新 <span class="muted" id="autoCount"></span></label>
+    <button class="btn btn-sm" id="exportBtn">导出 CSV</button>
+  </div>
+  <div class="table-wrap">
+    <table class="grid" id="priceTable">
+      <thead>
+        <tr>
+          <th data-col="icon" title="图标">图标</th>
+          <th data-col="name">中文名</th>
+          <th data-col="engname">英文名</th>
+          <th data-col="category" id="thCategory">分类</th>
+          <th class="num" data-col="buy">买入均价</th>
+          <th class="num" data-col="sell">卖出均价</th>
+          <th class="num" data-col="buy_ratio">买入涨跌</th>
+          <th class="num" data-col="sell_ratio">卖出涨跌</th>
+          <th class="num" data-col="buy_24h">24h 买/卖</th>
+          <th class="num" data-col="latest1">最新 买1/卖1</th>
+          <th data-col="unit">单位</th>
+          <th data-col="latest">价格时间</th>
+          <th data-col="status" title="数据源异常标记">状态</th>
+        </tr>
+      </thead>
+      <tbody id="priceBody"></tbody>
+    </table>
+  </div>
+  <div class="empty hidden" id="emptyState">没有匹配的道具</div>
+</section>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <img class="icon" id="dIcon" alt="" style="width:36px;height:36px">
+    <div>
+      <div class="drawer-title" id="dName">—</div>
+      <div class="drawer-sub" id="dEng">—</div>
+    </div>
+    <div class="spacer" style="margin-left:auto"></div>
+    <button class="btn btn-sm" id="drawerClose">关闭</button>
+  </div>
+  <div class="drawer-body">
+    <div id="dWarn"></div>
+    <div class="kv" id="dKv"></div>
+    <div class="section-title" style="margin-top:16px">近期走势（24h 均价，买入 / 卖出）</div>
+    <div id="dSpark"></div>
+    <div id="dChart" style="margin-top:10px"></div>
+    <div class="section-title" style="margin-top:16px">历史点（最近 7 天，最多 40 条）</div>
+    <div style="max-height:220px;overflow:auto">
+      <table class="grid"><thead><tr><th>时间</th><th class="num">买入</th><th class="num">卖出</th><th>单位</th></tr></thead>
+      <tbody id="dHistory"></tbody></table>
+    </div>
+  </div>
+</aside>
+{% endblock %}
+
+{% block scripts %}
+<script src="static/js/dashboard.js"></script>
+{% endblock %}
