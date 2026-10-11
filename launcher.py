@@ -7,8 +7,8 @@
 3. 用虚拟环境的 Python 启动 ``run.py``，并自动打开浏览器。
 
 命令行（也可直接把参数写给 ``start.bat``）：
-    python launcher.py                正常启动（抓取 + 打开浏览器）
-    python launcher.py offline        离线模式，启动时不抓取
+    python launcher.py                正常启动（同步仓库数据 + 抓取 + 打开浏览器）
+    python launcher.py offline        离线模式，启动时不抓取 API（仍会拉取仓库更新的数据）
     python launcher.py no-browser     不自动打开浏览器
     python launcher.py reload         开启代码热重载
     python launcher.py --port 9000    指定端口（等价环境变量 POE2_PORT）
@@ -143,7 +143,7 @@ def main() -> int:
     print("  PoE2 通货价格看板 · 一键启动")
     print(f"  项目目录 : {BASE_DIR}")
     print(f"  访问地址 : http://127.0.0.1:{port}")
-    print("  运行模式 : " + ("离线（不抓取）" if offline else "在线（启动即抓取）"))
+    print("  运行模式 : " + ("离线（不抓取 API，仍同步仓库数据）" if offline else "在线（同步仓库数据 + 启动即抓取）"))
     print("  停止服务 : 按 Ctrl + C，或直接关闭本窗口")
     print("=" * 60, flush=True)
 
@@ -157,7 +157,7 @@ def main() -> int:
     if ensure_deps(py):
         return 1
 
-    log("正在启动服务 ... 首次启动会导入本地快照并抓取一次数据")
+    log("正在启动服务 ... 首次启动会导入本地快照，并同步仓库数据、抓取一次最新价格")
     time.sleep(0.5)
     target = str(BASE_DIR / "run.py")
     try:

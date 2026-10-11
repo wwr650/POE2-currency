@@ -523,6 +523,12 @@ def seed_from_existing() -> dict[str, Any] | None:
         return None
 
 
+def iso_from_latest_datetime(payload: Any) -> str:
+    """用数据中最新的一条 ``latest_datetime`` 作为近似抓取时间（无则当前时间）。"""
+    candidate = _max_latest_datetime(payload)
+    return candidate or now_iso()
+
+
 def _max_latest_datetime(payload: Any) -> str | None:
     best: str | None = None
     groups = payload if isinstance(payload, list) else []

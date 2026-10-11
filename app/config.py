@@ -45,6 +45,12 @@ USER_AGENT = (
 FETCH_INTERVAL_HOURS = float(os.getenv("POE2_FETCH_INTERVAL_HOURS", "1"))
 FETCH_ON_STARTUP = os.getenv("POE2_FETCH_ON_STARTUP", "1") not in ("0", "false", "False")
 
+# ---------------------------------------------------------------- 仓库数据同步
+#: 启动时从 GitHub 仓库拉取 Actions 定时抓取的最新数据（两种启动方式均生效）
+SYNC_REPO_ON_STARTUP = os.getenv("POE2_SYNC_REPO_ON_STARTUP", "1") not in ("0", "false", "False")
+#: 仓库分支（默认 main，可用环境变量覆盖）
+REPO_BRANCH = os.getenv("POE2_REPO_BRANCH", "main")
+
 # ---------------------------------------------------------------- 服务
 HOST = os.getenv("POE2_HOST", "127.0.0.1")
 PORT = int(os.getenv("POE2_PORT", "8000"))

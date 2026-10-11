@@ -9,7 +9,7 @@ from datetime import datetime
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import StreamingResponse
 
-from .. import config, fetcher, storage
+from .. import config, fetcher, reposync, storage
 
 log = logging.getLogger(__name__)
 router = APIRouter()
@@ -199,6 +199,15 @@ async def manual_refresh() -> dict:
     if not status.get("ok"):
         raise HTTPException(status_code=502, detail=f"抓取失败：{status.get('error')}")
     return {"ok": True, **status}
+
+
+@router.post("/sync-repo")
+async def manual_sync_repo() -> dict:
+    """手动从 GitHub 仓库拉取 Actions 更新的数据（不比本地新则不会入库）。"""
+    result = await reposync.sync_once()
+    if not result.get("ok"):
+        raise HTTPException(status_code=502, detail=f"仓库同步失败：{result.get('reason')}")
+    return result
 
 
 @router.get("/export.csv")

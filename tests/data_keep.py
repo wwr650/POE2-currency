@@ -95,6 +95,7 @@ with httpx.Client(base_url=API, timeout=60) as c:
     suites = [
         ([PY, "-X", "utf8", "tests/acceptance.py"], "后端端到端"),
         ([PY, "-X", "utf8", "tests/one_click.py"], "一键启动自检"),
+        ([PY, "-X", "utf8", "tests/repo_sync.py"], "仓库数据同步自检"),
         (["node", "tests/frontend-smoke.js"], "前端冒烟"),
         (["node", "tests/render-check.js"], "真实数据渲染"),
         (["node", "tests/profit-interaction.js"], "收益页交互"),

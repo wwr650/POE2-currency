@@ -6,6 +6,7 @@
     POE2_API_URL                   数据源地址
     POE2_FETCH_INTERVAL_HOURS      抓取间隔（小时，默认 1）
     POE2_FETCH_ON_STARTUP=0        启动时不立即抓取
+    POE2_SYNC_REPO_ON_STARTUP=0    启动时不拉取 GitHub 仓库（Actions）更新的数据
     POE2_API_TIMEOUT / POE2_API_RETRIES
 """
 from __future__ import annotations
@@ -50,6 +51,7 @@ def main() -> int:
 ============================================================
   PoE2 通货价格看板  →  http://{config.HOST}:{config.PORT}
   数据源   : {config.API_URL}
+  仓库同步 : {'启动时拉取 GitHub 仓库数据' if config.SYNC_REPO_ON_STARTUP else '已关闭'}
   抓取间隔 : 每 {config.FETCH_INTERVAL_HOURS} 小时
   数据库   : {config.DB_PATH}
   停止服务 : Ctrl + C
