@@ -21,6 +21,11 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    # 将运行器时区设为北京时间（UTC+8）：
+    #   1) Python datetime.now().astimezone() 会跟随 TZ，快照文件名与 fetched_at 采用北京时间
+    #   2) 下面的 date 命令输出也为北京时间
+    env:
+      TZ: Asia/Shanghai
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,8 +58,8 @@ jobs:
             exit 0
           fi
 
-          ts="$(date -u '+%Y-%m-%d %H:%M UTC')"
-          git commit -m "chore(data): 自动抓取 summary（${ts}）"
+          ts="$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
+          git commit -m "chore(data): 自动抓取 summary（北京时间 ${ts}）"
 
           # 推回触发当前工作流的分支（通常为默认分支 main）
           git push origin "HEAD:${GITHUB_REF_NAME}"
