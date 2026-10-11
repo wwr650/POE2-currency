@@ -1,0 +1,60 @@
+name: Fetch summary data
+
+# 每小时的第 30 分钟抓取一次 summary 数据（如 10:30、11:30、12:30 …）。
+# GitHub Actions 的 cron 按 UTC 解析，但这里只约束「分钟=30」，
+# 因此在任意本地时区（如北京时间 UTC+8）同样落在半点。
+on:
+  schedule:
+    - cron: "30 * * * *"
+  # 允许在 Actions 页面手动触发一次，便于调试或补抓
+  workflow_dispatch:
+
+# 需要写回仓库（提交抓取结果）
+permissions:
+  contents: write
+
+# 同一时间只跑一个抓取任务，避免因延迟排队导致并发覆盖
+concurrency:
+  group: fetch-summary
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch summary
+        # 如需覆盖数据源，可在仓库 Settings → Secrets and variables → Actions
+        # 里新增变量 POE2_API_URL，然后在此处引用：${{ vars.POE2_API_URL }}
+        run: python scripts/fetch_summary.py
+
+      - name: Commit & push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # 仅提交抓取产物：根目录 summary.json 与新增快照
+          git add summary.json data/snapshots/
+
+          if git diff --cached --quiet; then
+            echo "本次抓取没有产生变化，跳过提交。"
+            exit 0
+          fi
+
+          ts="$(date -u '+%Y-%m-%d %H:%M UTC')"
+          git commit -m "chore(data): 自动抓取 summary（${ts}）"
+
+          # 推回触发当前工作流的分支（通常为默认分支 main）
+          git push origin "HEAD:${GITHUB_REF_NAME}"
