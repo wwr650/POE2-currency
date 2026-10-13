@@ -3,37 +3,42 @@
 
 ## 1. 项目概述
 
-构建一个本地运行的 Web 应用，用于监控《流放之路2》(PoE2) 通货价格、分析刷图收益。系统定时抓取 poecurrency.top 的价格 API，保存历史数据，提供实时价格看板、历史趋势折线图和可配置的收益计算器。
+构建一个本地运行的 Web 应用，用于监控《流放之路2》(PoE2) 通货价格、分析刷图收益。价格数据统一由 GitHub Actions 定时抓取 poecurrency.top 的价格 API 并提交回仓库，本地服务只同步这份数据（不再直接抓取），提供实时价格看板、历史趋势折线图和可配置的收益计算器。
 
 **技术栈**：Python 3.10+ / FastAPI / Uvicorn / APScheduler / Jinja2 或前端静态页 / Chart.js / SQLite（或 JSON 文件）
 
-**数据来源**：`https://poecurrency.top/api/summary?version=2`
+**数据来源**：GitHub 仓库中由 Actions 定时抓取的快照（源头为 `https://poecurrency.top/api/summary?version=2`，仅 Actions 脚本直连）
 
 ---
 
 ## 2. 功能模块与目标
 
-### 模块 A：数据采集器（Scheduler + Fetcher）
+### 模块 A：数据采集（Actions 抓取 + 本地仓库同步）
 
-**目标**：每小时自动抓取一次价格数据并持久化。
+**目标**：每小时自动获得一次最新价格数据并持久化；本地不直接抓取 API。
 
 **要求**：
 
-1. **定时任务**
+1. **抓取（仅 GitHub Actions 侧）**
 
-   - 使用 APScheduler 的 `BackgroundScheduler`，间隔 1 小时执行一次（`interval` 触发器）。
-   - 应用启动时立即执行一次抓取，避免等待首个小时。
-   - 任务需容错：网络失败时记录日志，不中断调度。
-2. **抓取逻辑**
+   - `.github/workflows/fetch-summary.yml` 每小时 :30 执行 `scripts/fetch_summary.py`（调用 `app/fetcher.py` 抓取管线），把结果提交回仓库。
+2. **一次性历史回填（本地侧）**
 
-   - 使用 `httpx.AsyncClient` 或 `requests` 调用 API，超时 15s，失败重试 3 次（指数退避）。
-   - 校验响应为合法 JSON 且非空数组。
-3. **文件保存**
+   - 启动时 `reposync.startup_sync()` 先把仓库已随 clone 到本地的 `data/snapshots/*.json`（Actions 逐小时提交的历史）按 `fetched_at` 去重回填进 SQLite，补齐趋势图；
+   - 纯本地读文件、无网络、幂等（已入库时间点自动跳过）；也可由 `scripts/backfill_snapshots.py` 手动触发。
+3. **持续同步任务（本地侧）**
 
-   - 每次抓取保存到 `data/summary_YYYYMMDD_HHMMSS.json`（历史快照）。
-   - 同时覆盖写入 `summary.json`（当前最新，路径为项目根目录，便于用户直接查看）。
-   - 保存内容需附加元数据：`{"fetched_at": "...", "source": "...", "data": [...]}`；若为兼容考虑，也可保留纯数组格式并用单独文件记录时间戳。
-4. **历史索引**
+   - 使用 APScheduler 的 `BackgroundScheduler`，每 1 小时执行 `reposync.sync_once()`：先通过 GitHub Contents API 列出仓库 `data/snapshots/`，仅下载并入库本地缺失的快照（Action 每抓取成功一次新增一份，自动落入）；再兜底拉取最新一份 `summary.json`。
+   - 应用启动时立即执行一次同步（历史增量回填由定时/手动任务负责，避免首屏大量下载）。
+   - 任务需容错：列目录/拉取失败时记录日志，不中断调度，服务照常启动。
+4. **入库约束**
+
+   - 历史目录用 `api.github.com`、单文件用 `raw.githubusercontent.com`，均为纯 HTTP GET，不需要 git 权限（可选 `POE2_GITHUB_TOKEN` 提高速率）；
+   - 去重以快照 `fetched_at` 的秒级标识为键，同秒视为同一份数据不重复入库；根 `summary.json` 仅在比本地最新时才入库（来源标记 `repo:github(...)`），本地同步不回写根目录 `summary.json`。
+5. **文件保存**
+
+   - 同步入库写入 SQLite 与 `data/summary.json`（带元数据的最新快照）；历史回填/增量只入库，不重复写 `data/snapshots/`。
+6. **历史索引**
 
    - 维护 `data/index.json`：`[{"file": "...", "fetched_at": "...", "item_count": N}, ...]`，供折线图查询。
 
@@ -84,7 +89,7 @@
 
    - 显示当前汇率：`1 Divine = X Exalted`。
    - 数据最后更新时间。
-   - 抓取状态（正常/失败/上次错误信息）。
+   - 同步状态（正常/失败/上次错误信息）。
    - 道具总数、异常条目数（`error == true`）。
 2. **分类 Tab**
 
@@ -210,11 +215,12 @@
 poe2-dashboard/
 ├── app/
 │   ├── main.py                 # FastAPI 入口，挂载路由与调度器
-│   ├── config.py               # 配置（API URL、间隔、路径）
-│   ├── fetcher.py              # 抓取与保存
+│   ├── config.py               # 配置（仓库同步、间隔、路径）
+│   ├── fetcher.py              # 抓取管线（仅供 GitHub Actions 脚本使用）
+│   ├── reposync.py             # 从 GitHub 仓库同步 Actions 数据（本地唯一数据来源）
 │   ├── parser.py               # JSON 解析、汇率提取
 │   ├── storage.py              # SQLite / JSON 读写
-│   ├── scheduler.py            # APScheduler 封装
+│   ├── scheduler.py            # APScheduler 封装（每小时仓库同步）
 │   ├── routers/
 │   │   ├── prices.py           # /api/prices, /api/history
 │   │   ├── profit.py           # /api/profit/*
@@ -275,8 +281,8 @@ API 中 `currency_unit` 为 `d` 或 `e`。观察数据：
 ## 5. 交付标准（验收清单）
 
 - [ ] 启动 `python run.py` 后，服务监听 `http://127.0.0.1:8000`。
-- [ ] 启动后 10 秒内完成首次抓取，`summary.json` 存在且为最新数据。
-- [ ] 每小时自动抓取，`data/snapshots/` 下按时间生成文件，`index.json` 递增。
+- [ ] 启动后完成一次历史回填 + 仓库同步（或导入基线快照），看板/趋势图有完整历史数据可展示。
+- [ ] 每小时自动同步仓库数据，Action 新抓取的快照会被增量拉取入库，停机期间的历史缺口也会被补齐。
 - [ ] 看板页展示所有分类、排序、搜索、单位切换、涨跌着色、异常标记正常。
 - [ ] 汇率卡片显示当前 `1 d = X e`。
 - [ ] 趋势页可选择道具并绘制最近 7 天折线，汇率折线可独立查看。

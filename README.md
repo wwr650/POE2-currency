@@ -1,7 +1,8 @@
 # PoE2 通货价格看板与收益分析工具
 
-本地运行的《流放之路2》通货价格监控 + 收益测算工具。定时抓取
-[poecurrency.top](https://poecurrency.top) 的价格 API，保存历史快照，提供：
+本地运行的《流放之路2》通货价格监控 + 收益测算工具。价格数据统一来自
+由 GitHub Actions 定时抓取 [poecurrency.top](https://poecurrency.top) 并提交回仓库的历史快照，
+本地服务不再直接抓取 API（无需代理/VPN，只要能访问 GitHub），提供：
 
 - **价格看板**：分类 Tab、搜索、排序、涨跌着色、异常标记、单位切换（d / e）、导出 CSV
 - **历史趋势**：汇率折线 + 单/多道具价格折线（最多 5 个对比）、快照索引列表
@@ -20,7 +21,7 @@
 
 1. 找不到 `.venv` 就用系统 Python 自动创建；
 2. 依赖不全自动 `pip install -r requirements.txt`（已装好则跳过，不联网）；
-3. 启动时先从 GitHub 仓库拉取 Actions 更新的数据（见 [1.1](#11-启动时自动拉取仓库数据)），再抓取一次实时价格；
+3. 启动时从 GitHub 仓库拉取 Actions 定时抓取的最新数据（见 [1.1](#11-仓库数据同步本地唯一数据来源)）；
 4. 启动服务，并在端口就绪后自动打开浏览器 <http://127.0.0.1:8000>。
 
 启动日志里的每一个阶段（虚拟环境、依赖、服务启动）与失败原因都会用中文写清楚，
@@ -30,8 +31,8 @@
 
 | 命令 | 效果 |
 | --- | --- |
-| `start.bat` | 默认：同步仓库数据 + 抓取一次 + 自动开浏览器 |
-| `start.bat offline` | 离线模式，启动时不抓取 API（仍会同步仓库数据） |
+| `start.bat` | 默认：同步仓库数据（Actions 抓取）+ 自动开浏览器 |
+| `start.bat offline` | 离线模式，启动时不同步仓库数据（只看本地已有数据） |
 | `start.bat no-browser` | 启动但不自动打开浏览器 |
 | `start.bat reload` | 开发用，代码改动自动热重载 |
 | `start.bat --port 9000` | 换端口（等价于环境变量 `POE2_PORT`） |
@@ -49,39 +50,61 @@ python -m venv .venv
 .venv\Scripts\activate            # Windows；Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
 
-# 2) 启动（先同步仓库数据，再导入已有 summary.json 作为基线快照，最后立即抓取一次）
+# 2) 启动（先导入已有 summary.json 作为基线快照，再从 GitHub 仓库同步 Actions 抓取的最新数据）
 python run.py            # 加 --open 可在启动后自动打开浏览器
 ```
 
 浏览器打开 <http://127.0.0.1:8000> 。
 
-> 说明：本机若无法直连 `poecurrency.top`（需要代理/VPN），服务依旧可以正常启动：
-> 启动时会先把 GitHub 仓库里 Actions 定时抓取的最新数据补进本地库，
-> 点击顶部「立即抓取」则会在网络恢复后补齐历史。
+> 说明：本地服务不直接抓取 `poecurrency.top`（无需代理/VPN），
+> 数据统一来自 GitHub Actions 定时抓取并提交回仓库的快照；
+> 启动时会**自动把仓库已随 clone 到本地的历史快照一次性回填进库**（补齐趋势图），
+> 并拉取最新一份；之后每小时增量同步一次，也可点击顶部「同步数据」手动拉取。
 
-### 1.1 启动时自动拉取仓库数据
+### 1.1 仓库数据同步（本地唯一数据来源）
 
-仓库已配置 GitHub Actions（`.github/workflows/fetch-summary.yml`）每小时 :30 抓取一次
-并把结果提交回来（根目录 `summary.json` + `data/snapshots/`）。本地服务启动时（**两种启动方式都一样**）会先把这份数据拉下来：
+仓库已配置 GitHub Actions（`.github/workflows/fetch-summary.yml`）每小时 :30 抓取一次，
+并把结果提交回仓库：根目录 `summary.json`（最新一份）+ `data/snapshots/`（逐小时历史快照，
+每份都是带 `fetched_at` / `source` / `data` 的完整信封）。**本地服务不再直接抓取 API**，
+统一消费这份数据，分两条链路：
+
+**A. 一次性历史回填（补齐趋势图历史点）**
+
+Actions 积累的逐小时历史随仓库 clone 到本地 `data/snapshots/`。`reposync.backfill_from_local()`
+把它们按 `fetched_at` 去重后一次性写入 SQLite（**纯本地读取、无需网络、可重复执行幂等**），
+让历史趋势图立刻拥有完整数据点。触发方式：
+
+- **启动即自动回填**：服务启动时 `startup_sync()` 会先跑一遍本地回填（秒级，已入库的时间点自动跳过），
+  因此全新 clone 后首次启动就自带完整历史，无需手动操作；
+- **手动执行**：`python scripts\backfill_snapshots.py`（打印扫描/新增/跳过/失败统计）；
+- **接口触发**：`POST /api/sync-repo` 会顺带增量回填。
+
+**B. 持续同步（Action 每次抓取成功后自动入库）**
 
 1. 识别仓库：读 `.git/config` 里的 `origin`（也可用 `POE2_REPO_URL` 直接指定）；
-2. 纯 HTTP GET 拉取仓库中的 `data/summary.json`（带元数据）或 `summary.json`，**不需要 git 权限**；
-3. 只有仓库数据的时间比本地最新快照**更新**时才入库（来源标记 `repo:github(...)`，看板概览卡会显示），
-   因此不会每启动一次就多写一份重复快照，也不会覆盖本地更新的数据；
-4. 拉不到（无网络 / 非 GitHub 仓库 / 已关闭开关）只记一条日志，服务照常启动。
+2. 通过 GitHub Contents API 列出仓库 `data/snapshots/`，**只下载并入库本地缺失的快照**
+   （Action 每成功抓取一次就多提交一份，下一次同步即自动拉取入库；停机期间的历史缺口也会被补齐）；
+3. 再兜底纯 HTTP GET 拉取最新一份 `data/summary.json` / `summary.json`，仅当比本地最新**更新**时入库
+   （列出目录失败时仍能拿到最新，**不需要 git 权限**）；
+4. 去重以快照 `fetched_at` 的秒级标识为键，同秒视为同一份数据不重复入库；
+5. 拉不到（无网络 / 非 GitHub 仓库 / 已关闭开关）只记一条日志，服务照常启动。
 
 可用开关：
 
 ```powershell
-$env:POE2_SYNC_REPO_ON_STARTUP = "0"        # 关闭启动时的仓库同步
+$env:POE2_SYNC_REPO_ON_STARTUP = "0"        # 关闭启动时的仓库同步（定时同步仍会执行）
+$env:POE2_REPO_SYNC_INTERVAL_HOURS = "1"    # 定时同步间隔（小时，支持小数；0 以下则不启用定时同步）
+$env:POE2_REPO_SYNC_HISTORY = "0"           # 关闭历史目录增量回填（只同步最新一份 summary.json）
+$env:POE2_GITHUB_TOKEN = "ghp_..."          # 可选：提升 Contents API 速率限制（匿名 60/小时 → 带 Token 5000/小时）
 $env:POE2_REPO_URL = "https://github.com/owner/repo"   # 手动指定仓库
 $env:POE2_REPO_BRANCH = "main"             # 分支（默认 main）
 ```
 
-也可以随时手动拉一次：`POST /api/sync-repo`（或 `python -c "from app import reposync; print(reposync.sync_once_sync())"`）。
+也可以随时手动拉一次：点顶部「同步数据」按钮、调用 `POST /api/sync-repo`，
+或 `python -c "from app import reposync; print(reposync.sync_once_sync())"`。
 
-> 仓库同步与 API 抓取是两条独立链路：`offline` 模式只关 API 抓取，仓库同步依旧执行；
-> 想两个都关，就再设 `POE2_SYNC_REPO_ON_STARTUP=0`。
+> `offline` 启动模式（`start.bat offline`）等价于 `POE2_SYNC_REPO_ON_STARTUP=0`：
+> 启动时不发任何网络请求，只看本地已有数据。
 
 ---
 
@@ -89,7 +112,7 @@ $env:POE2_REPO_BRANCH = "main"             # 分支（默认 main）
 
 | 路由 | 页面 | 说明 |
 | --- | --- | --- |
-| `/` | 价格看板 | 概览卡（汇率 / 更新时间 / 抓取状态 / 条目数 / 快照数）、分类 Tab、搜索、排序、单位切换、异常高亮、点击行看详情与 7 天走势、导出 CSV |
+| `/` | 价格看板 | 概览卡（汇率 / 更新时间 / 同步状态 / 条目数 / 快照数）、分类 Tab、搜索、排序、单位切换、异常高亮、点击行看详情与 7 天走势、导出 CSV |
 | `/trends` | 历史趋势 | 汇率折线（24h / 7d / 30d / 全部）、道具价格折线（最多 5 个对比，单位 d / e / 源单位）、**买入/卖出用两种高对比颜色区分**、按分类筛选 + 中文/英文/分类名过滤、区间涨跌统计、快照索引 |
 | `/profit` | 收益分析 | 门票（成本）＋掉落（概率）→ 期望收益、净收益、ROI、每分钟/每小时收益；**门票/掉落选择器支持分类分组 + 直接搜索**；每行显示所选价格来源的单价；概率可手填（0~100%，输入框前有「概率」指示，数量固定为 1 故不需输入）；每行可删除、可一键清空；自定义道具可一键「加入门票」或「加入掉落」；配置保存/加载/删除/导入导出；**切换页面后自动恢复上次的门票/掉落配置** |
 | `/docs` | 接口文档 | FastAPI 自动生成的 OpenAPI 文档 |
@@ -128,16 +151,16 @@ $env:POE2_REPO_BRANCH = "main"             # 分支（默认 main）
 POE2-currency/
 ├── app/
 │   ├── main.py               FastAPI 入口：路由、静态资源、生命周期
-│   ├── config.py             配置（API 地址、间隔、路径、端口）
-│   ├── fetcher.py            抓取（httpx，15s 超时，3 次指数退避重试）
-│   ├── reposync.py           启动时拉取 GitHub 仓库（Actions）更新的数据
+│   ├── config.py             配置（仓库同步、路径、端口；API 地址仅 Actions 脚本用）
+│   ├── fetcher.py            抓取管线（httpx，重试退避；仅供 GitHub Actions 脚本使用）
+│   ├── reposync.py           从 GitHub 仓库同步 Actions 数据 + 历史回填（本地唯一数据来源）
 │   ├── parser.py             JSON 解析 + 汇率提取
 │   ├── storage.py            SQLite 主存储 + JSON 快照/索引
 │   ├── store.py              JSON 文档存储（配置、自定义道具）
 │   ├── profit.py             收益计算引擎
-│   ├── scheduler.py          APScheduler（每小时，启动先同步仓库数据再抓一次）
+│   ├── scheduler.py          APScheduler（启动本地回填+同步最新，每小时增量回填仓库历史）
 │   ├── routers/
-│   │   ├── prices.py         /api/prices /api/history /api/meta /api/refresh /api/sync-repo /api/export.csv
+│   │   ├── prices.py         /api/prices /api/history /api/meta /api/sync-repo /api/export.csv
 │   │   ├── profit.py         /api/profit/*
 │   │   ├── custom.py         /api/custom-items
 │   │   └── backup.py         /api/backup（导出 / 导入 / 计数）
@@ -151,7 +174,7 @@ POE2-currency/
 │   ├── prices.db             SQLite（snapshots / prices / rates）
 │   ├── profit_configs.json   收益配置
 │   ├── custom_items.json     自定义道具
-│   └── fetch_status.json     最近一次抓取状态
+│   └── fetch_status.json     最近一次同步状态
 ├── summary.json              最新快照（API 原始数组，便于直接查看）
 ├── requirements.txt
 ├── run.py                    启动脚本
@@ -164,34 +187,35 @@ POE2-currency/
 │   ├── profit-interaction.js    收益页交互测试（43 项）
 │   ├── unit-price-regression.js 首屏单价回归测试（9 项）
 │   ├── one_click.py             一键启动脚本自检（17 项）
-│   ├── repo_sync.py             仓库数据同步自检（33 项，无需网络）
+│   ├── repo_sync.py             仓库数据同步自检（41 项，无需网络）
 │   ├── dashboard-columns.js     看板表头/列对齐回归（9 项）
 │   └── data_keep.py             数据保全自检（24 项：测试不得删除用户数据）
 └── README.md
 ```
 
-> 根目录 `summary.json` 的写入可能被受管环境的文件权限拒绝（该文件在会话开始前就存在，
-> 仅允许读取）。此时服务不会报错，而是照常入库并把最新数据写到
-> `data/summary.json`、`data/snapshots/`，同时**额外**写出 `summary.json.new`
-> 供你手动替换，`/api/refresh` 与看板都会提示这条警告。
-> 若希望它每次都被自动更新，可删除该文件后重启（新建文件通常具备写权限），
-> 或把文件权限改为可写。
+> 根目录 `summary.json` 是 GitHub Actions 的抓取产物，本地同步**从不回写**它，
+> 不会弄脏工作区；本地数据全部落在 `data/`（SQLite + `data/snapshots/` + `index.json`）。
+> Actions 端若因受管环境文件权限无法覆盖 `summary.json`，抓取脚本会照常入库并
+> 额外写出 `summary.json.new` 供手动替换（见 `app/storage.py`）。
 
 ---
 
 ## 4. 数据流
 
-1. `BackgroundScheduler` 每 1 小时触发一次抓取；应用启动时先导入已有 `summary.json`
-   作为基线快照，再拉取一次 **GitHub 仓库（Actions）更新的数据**（`app/reposync.py`，
-   仅在仓库数据比本地更新时入库），随后立即抓取一次实时价格（两项均可用环境变量关闭）。
-2. 抓取成功 → 解析 → 提取汇率 → 写入 SQLite（`snapshots` / `prices` / `rates`）→
-   写 `data/snapshots/summary_<时间戳>.json`、覆盖 `summary.json` 与 `data/summary.json` →
-   追加 `data/index.json`。
-3. 网络失败：记录日志与 `fetch_status.json`，调度不中断，看板继续展示上一次数据。
-4. 看板每 60 秒轮询 `/api/prices` 刷新，概览卡每 30 秒刷新相对时间。
-5. 每次点击「立即抓取」也会生成一份快照（来源标记为 `manual`），可用来手动累积历史点。
-6. 仓库拉取的数据来源标记为 `repo:github(文件名)`，只入 SQLite 与 `data/snapshots/`，
-   **不回写**根目录 `summary.json`（那是 Actions 的产物，避免本地修改弄脏工作区）。
+1. GitHub Actions 每小时的 :30 执行 `scripts/fetch_summary.py`（调用 `app/fetcher.py`
+   抓取管线）→ 把最新数据提交回仓库（根目录 `summary.json` + 逐小时历史 `data/snapshots/`）。
+2. 本地服务启动时先导入已有 `summary.json` 作为基线快照，再执行 `reposync.startup_sync()`：
+   **先把仓库已随 clone 到本地的 `data/snapshots/` 历史快照一次性去重回填进 SQLite**
+   （`backfill_from_local`，无网络、幂等，补齐趋势图），再拉取一次最新一份；
+   之后 `BackgroundScheduler` 每 1 小时执行 `sync_once`：**列出仓库历史目录、仅下载并入库
+   本地缺失的快照**（Action 每次抓取成功后自动落入），再兜底同步最新一份（可用环境变量调整/关闭）。
+3. 入库 → 解析 → 提取汇率 → 写入 SQLite（`snapshots` / `prices` / `rates`）；
+   去重以 `fetched_at` 秒级标识为键，同秒不重复入库（回填与增量都幂等）。
+4. 拉取失败或无更新：记录日志与 `fetch_status.json`（同步状态），调度不中断，
+   看板继续展示上一次数据。
+5. 看板每 60 秒轮询 `/api/prices` 刷新，概览卡每 30 秒刷新相对时间。
+6. 点击顶部「同步数据」（`POST /api/sync-repo`）= 手动跑一次带历史增量回填的同步，与定时任务同一实现；
+   本地同步**从不回写**根目录 `summary.json`（那是 Actions 的产物，避免本地修改弄脏工作区）。
 
 ---
 
@@ -318,15 +342,14 @@ node tests\dashboard-columns.js
 
 | 方法 | 路径 | 说明 |
 | --- | --- | --- |
-| GET | `/api/meta` | 概览：汇率、更新时间、抓取状态、分类统计、调度信息 |
+| GET | `/api/meta` | 概览：汇率、更新时间、同步状态、分类统计、调度信息 |
 | GET | `/api/prices` | 价格列表（`category` / `search` / `sort` / `order` / `only_error` / `limit` / `offset`） |
 | GET | `/api/options` | 去重道具列表（选择器用） |
 | GET | `/api/history?item=Divine Orb&hours=168&unit=d` | 单/多道具时间序列（`items=a,b,c` 最多 5 个） |
 | GET | `/api/history/rate?hours=168` | 汇率时间序列 |
 | GET | `/api/history/items?hours=720` | 历史中出现过的道具 |
 | GET | `/api/snapshots` | 快照索引 |
-| POST | `/api/refresh` | 立即抓取一次 |
-| POST | `/api/sync-repo` | 立即从 GitHub 仓库拉取 Actions 更新的数据（不比本地新则不入库） |
+| POST | `/api/sync-repo` | 立即从 GitHub 仓库拉取 Actions 更新的数据（不比本地新则不入库；本地唯一的数据刷新入口） |
 | GET | `/api/export.csv` | 导出 CSV（UTF-8 BOM，Excel 可直接打开） |
 | POST | `/api/profit/calculate` | 收益计算 |
 | GET | `/api/profit/configs` | 配置列表 |
@@ -368,25 +391,24 @@ node tests\dashboard-columns.js
 | --- | --- | --- |
 | `POE2_HOST` | `127.0.0.1` | 监听地址（`0.0.0.0` 可供局域网访问） |
 | `POE2_PORT` | `8000` | 监听端口 |
-| `POE2_API_URL` | `https://poecurrency.top/api/summary?version=2` | 数据源地址 |
-| `POE2_API_TIMEOUT` | `15` | 单次请求超时（秒） |
-| `POE2_API_RETRIES` | `3` | 失败重试次数 |
-| `POE2_API_BACKOFF` | `2.0` | 指数退避基数（秒） |
-| `POE2_FETCH_INTERVAL_HOURS` | `1` | 抓取间隔（小时，支持小数） |
-| `POE2_FETCH_ON_STARTUP` | `1` | 设为 `0` 则启动时不立即抓取 API（纯离线使用，仓库同步仍生效） |
-| `POE2_SYNC_REPO_ON_STARTUP` | `1` | 设为 `0` 则启动时不拉取 GitHub 仓库数据 |
+| `POE2_REPO_SYNC_INTERVAL_HOURS` | `1` | 仓库数据同步间隔（小时，支持小数；`<=0` 则不启用定时同步） |
+| `POE2_SYNC_REPO_ON_STARTUP` | `1` | 设为 `0` 则启动时不拉取 GitHub 仓库数据（定时同步仍生效） |
 | `POE2_REPO_URL` | 自动从 `git remote` 识别 | 形如 `https://github.com/owner/repo`，非 git 克隆目录时手动指定 |
 | `POE2_REPO_BRANCH` | `main` | 仓库同步读取的分支 |
+| `POE2_REPO_SYNC_HISTORY` | `1` | 设为 `0` 则关闭历史目录（`data/snapshots/`）增量回填，只同步最新一份 |
+| `POE2_GITHUB_TOKEN` / `GITHUB_TOKEN` | 空 | 可选；提升 GitHub Contents API 速率限制（匿名 60/小时 → 5000/小时） |
+| `POE2_API_TIMEOUT` | `15` | 单次请求超时（秒，仓库同步与 Actions 抓取脚本共用） |
+| `POE2_API_URL` / `POE2_API_RETRIES` / `POE2_API_BACKOFF` | 见 `app/config.py` | 仅 GitHub Actions 抓取脚本（`scripts/fetch_summary.py`）使用，本地服务不再直接抓 API |
 
-示例（离线 / 快速演示）：
+示例（完全离线 / 只看本地数据）：
 
 ```powershell
-$env:POE2_FETCH_ON_STARTUP = "0"        # 不抓 API（仍会同步仓库数据）
-$env:POE2_SYNC_REPO_ON_STARTUP = "0"    # 再加一行则完全离线，只看本地已有数据
+$env:POE2_SYNC_REPO_ON_STARTUP = "0"    # 启动时不发网络请求
+$env:POE2_REPO_SYNC_INTERVAL_HOURS = "0"  # 再加一行则连定时同步也关闭
 python run.py
 ```
 
-等价的一键写法：`start.bat offline`（完全不离线则需先设上面两个变量再跑 `start.bat`）。
+等价的一键写法：`start.bat offline`（仅关启动时同步；连定时同步也想关需先设上面两个变量再跑 `start.bat`）。
 
 ---
 
@@ -395,8 +417,8 @@ python run.py
 - **手动补充历史**：把符合数据源格式的 JSON 放到任意位置，然后在 Python 中调用
   `app.fetcher.load_local_file(Path("xxx.json"))`，或直接替换根目录 `summary.json` 后删除
   `data/prices.db` 重新启动（会重新导入基线快照）。
-- **从仓库补数据**：启动时自动执行（见 [1.1](#11-启动时自动拉取仓库数据)），也可随时
-  `POST /api/sync-repo` 手动拉一次。
+- **从仓库补数据**：启动时与每小时自动执行（见 [1.1](#11-仓库数据同步本地唯一数据来源)），也可随时
+  `POST /api/sync-repo`（或点顶部「同步数据」）手动拉一次。
 - **清空历史**：删除 `data/prices.db`、`data/snapshots/`、`data/index.json` 后重启。
 - **备份**：整个 `data/` 目录 + 根目录 `summary.json` 即为全部持久化数据，重启不丢失。
 - **日志**：`data/logs/app.log`（滚动，单个最大 2 MB，保留 3 份）。
@@ -424,29 +446,28 @@ A：一键启动会等端口能连上才开浏览器；如果浏览器被系统�
 手动访问 <http://127.0.0.1:8000> 即可。端口被占可用 `start.bat --port 9000`。
 
 **Q：启动后概览卡显示「本地数据」，但一切都正常？**
-A：说明还没有成功的网络抓取，当前展示的是导入的已有 `summary.json`。点顶部「立即抓取」
-即可补上实时数据；若只想补上仓库里 Actions 已抓好的数据，点顶部前先试 `POST /api/sync-repo`；
-本机若无法直连数据源，历史数据、看板与收益计算仍然完全可用。
+A：说明还没有成功的仓库同步记录，当前展示的是导入的已有 `summary.json`。点顶部「同步数据」
+即可拉取仓库里 Actions 已抓好的最新数据；本机若无法访问 GitHub，历史数据、看板与收益计算仍然完全可用。
 
 **Q：顶部提示「根目录 summary.json 为只读」？**
-A：该文件被环境文件权限保护，无法被覆盖。所有数据仍然完整落库（SQLite + `data/`），
-同时会写出 `summary.json.new`。删除根目录 `summary.json` 后重启即可恢复自动更新。
+A：该文件是 Actions 的抓取产物，本地同步从不回写它。若 Actions 端写入被拒，所有数据仍然完整落库（SQLite + `data/`），
+同时会写出 `summary.json.new`。删除根目录 `summary.json` 后重跑抓取即可恢复自动更新。
 
 **Q：趋势图只有一个点 / 是空的？**
-A：趋势图按快照累积。首次导入记 1 个点，之后每小时抓取增加 1 个点；
-也可连续点击「立即抓取」手动加点（数据源本身约每小时更新一次价格）。
+A：趋势图按快照累积。首次导入记 1 个点，之后每小时同步时，只要仓库里有 Actions 新抓取的数据就会增加 1 个点
+（数据源本身约每小时更新一次价格）；同一份数据不会重复入库，因此长时间没有新提交就没有新点属正常现象。
 
-**Q：抓取失败提示连接被关闭？**
-A：本机网络无法直连该站点（常见于无代理环境）。启动时同步的仓库数据与历史数据、
-收益计算不受影响，网络恢复后点击「立即抓取」即可续上。
-
-**Q：本机根本连不上 `poecurrency.top`，怎么拿到最新价格？**
-A：靠仓库同步。GitHub Actions 在云端每小时抓一次并提交回仓库，本地启动时会把这份
-数据拉下来入库（见 [1.1](#11-启动时自动拉取仓库数据)）。看板概览卡的「更新时间」下方
+**Q：本机访问不了 `poecurrency.top`（需要代理/VPN），能用到最新价格吗？**
+A：能。本地从不直连该站点：GitHub Actions 在云端每小时抓一次并提交回仓库，
+本地启动时与每小时把这份数据同步下来入库（见 [1.1](#11-仓库数据同步本地唯一数据来源)）。看板概览卡的「更新时间」下方
 会显示来源 `repo:github(...)`，表示当前展示的是仓库里最新的一份数据。
 
+**Q：同步失败提示连接被关闭？**
+A：本机网络无法访问 GitHub（raw.githubusercontent.com）。历史数据、
+看板与收益计算不受影响，网络恢复后点「同步数据」即可续上。
+
 **Q：启动日志提示「仓库数据同步跳过」是否正常？**
-A：正常。多数原因是「仓库数据不比本地更新」（本地刚刚抓过更新的 API 数据），
+A：正常。多数原因是「仓库数据不比本地更新」（Actions 还没有新的提交），
 或是拉不到仓库（无网络 / 不是 GitHub 克隆目录）。后者可设 `POE2_REPO_URL` 手动指定，
 完全不需要这个功能则设 `POE2_SYNC_REPO_ON_STARTUP=0`；两种情况都不会影响服务启动。
 

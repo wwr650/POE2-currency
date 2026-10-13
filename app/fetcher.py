@@ -1,4 +1,8 @@
-"""抓取器：带超时、重试与指数退避的 API 拉取，并落盘持久化。"""
+"""抓取器：带超时、重试与指数退避的 API 拉取，并落盘持久化。
+
+仅供 GitHub Actions 抓取脚本 ``scripts/fetch_summary.py`` 使用；
+本地服务已移除直接抓取，统一通过 ``app.reposync`` 同步 Actions 提交回仓库的数据。
+"""
 from __future__ import annotations
 
 import asyncio

@@ -481,6 +481,20 @@ def snapshot_count() -> int:
     return int(row["n"]) if row else 0
 
 
+def existing_snapshot_stamps() -> set[str]:
+    """已入库快照的 ``fetched_at`` 秒级标识集合，用于历史回填去重。
+
+    取每条 ``fetched_at`` 的前 19 个字符（``YYYY-MM-DDTHH:MM:SS``，去时区/微秒），
+    与快照文件名里的时间戳同构（均为北京时间墙钟），可直接比对。
+    """
+    with _LOCK, connect() as conn:
+        try:
+            rows = conn.execute("SELECT fetched_at FROM snapshots").fetchall()
+        except sqlite3.OperationalError:
+            return set()
+    return {str(r["fetched_at"])[:19] for r in rows}
+
+
 def latest_fetch_log() -> dict[str, Any] | None:
     return read_json(config.DATA_DIR / "fetch_status.json", None)
 

@@ -86,12 +86,12 @@
       : '汇率未获取';
 
     els.updated.textContent = meta.fetched_at ? P.shortTime(meta.fetched_at) : '—';
-    els.updatedSub.textContent = meta.fetched_at ? P.timeAgo(meta.fetched_at) + ' · ' + (meta.source || '') : '等待首次抓取';
+    els.updatedSub.textContent = meta.fetched_at ? P.timeAgo(meta.fetched_at) + ' · ' + (meta.source || '') : '等待首次同步';
 
     const f = meta.fetch;
     if (f && f.ok) {
-      els.status.textContent = '正常';
-      els.statusSub.textContent = '最近成功 ' + P.shortTime(f.at) + ' · ' + (f.item_count || 0) + ' 条';
+      els.status.textContent = f.skipped ? '已是最新' : '正常';
+      els.statusSub.textContent = '最近同步 ' + P.shortTime(f.at) + ' · ' + (f.item_count || 0) + ' 条';
       els.status.style.color = 'var(--up)';
     } else if (f && !f.ok) {
       els.status.textContent = '失败';
@@ -99,7 +99,7 @@
       els.status.style.color = 'var(--down)';
     } else {
       els.status.textContent = '本地数据';
-      els.statusSub.textContent = '尚未执行网络抓取';
+      els.statusSub.textContent = '尚未执行仓库同步（数据来源：GitHub Actions）';
       els.status.style.color = 'var(--warn)';
     }
 

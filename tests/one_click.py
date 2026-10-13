@@ -52,7 +52,7 @@ try:
     args, off = launcher.parse_args([])
     check("默认打开浏览器", args == ["--open"] and off is False)
     args, off = launcher.parse_args(["offline"])
-    check("offline 不抓取", off is True)
+    check("offline 不同步仓库", off is True)
     args, off = launcher.parse_args(["no-browser"])
     check("no-browser 去掉 --open", args == [])
     args, _ = launcher.parse_args(["reload"])
@@ -64,7 +64,7 @@ finally:
         os.environ.pop("POE2_PORT", None)
     else:
         os.environ["POE2_PORT"] = saved_port
-    os.environ.pop("POE2_FETCH_ON_STARTUP", None)
+    os.environ.pop("POE2_SYNC_REPO_ON_STARTUP", None)
 
 # 3) 依赖探测（虚拟环境已就绪时不应缺失）
 py = launcher.venv_python()

@@ -9,7 +9,7 @@ from datetime import datetime
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import StreamingResponse
 
-from .. import config, fetcher, reposync, storage
+from .. import config, reposync, storage
 
 log = logging.getLogger(__name__)
 router = APIRouter()
@@ -26,7 +26,7 @@ def get_meta() -> dict:
     if not snap:
         return {
             "ok": False,
-            "message": "暂无数据，请点击“立即抓取”或等待调度器完成首次抓取",
+            "message": "暂无数据，请点击顶部“同步数据”或等待定时同步拉取 GitHub 仓库（Actions）抓取的数据",
             "rate": {"d_to_e": None, "source": None, "fetched_at": None},
             "fetch": storage.latest_fetch_log(),
             "categories": [],
@@ -193,17 +193,15 @@ def get_history_items(hours: int = Query(720, ge=1, le=8760), limit: int = Query
 
 
 # ------------------------------------------------------------------ 运维
-@router.post("/refresh")
-async def manual_refresh() -> dict:
-    status = await fetcher.fetch_and_store(source="manual")
-    if not status.get("ok"):
-        raise HTTPException(status_code=502, detail=f"抓取失败：{status.get('error')}")
-    return {"ok": True, **status}
-
-
 @router.post("/sync-repo")
 async def manual_sync_repo() -> dict:
-    """手动从 GitHub 仓库拉取 Actions 更新的数据（不比本地新则不会入库）。"""
+    """手动从 GitHub 仓库拉取 Actions 更新的数据。
+
+    本地直接抓取已移除：数据统一来自 GitHub Actions 定时抓取并提交回仓库的快照。
+    本接口会：
+    * 增量回填仓库 ``data/snapshots/`` 中本地缺失的历史快照（补齐趋势图）；
+    * 再兜底拉取最新一份 ``summary.json``（不比本地新则不入库）。
+    """
     result = await reposync.sync_once()
     if not result.get("ok"):
         raise HTTPException(status_code=502, detail=f"仓库同步失败：{result.get('reason')}")

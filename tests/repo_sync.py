@@ -7,7 +7,8 @@
 3. 「仓库数据是否比本地新」的判定（更新 / 更旧 / 相同 / 非法 / 跨时区）；
 4. 导入行为：用假响应跑一遍 ``sync_once``，只入库一次、重复调用跳过、
    拉取失败不入库也不抛异常；
-5. 启动流程：``scheduler`` 会先同步仓库；``POE2_SYNC_REPO_ON_STARTUP=0`` 时不发请求。
+5. 启动流程：``scheduler`` 只做仓库同步（本地抓取已移除）；
+   ``POE2_SYNC_REPO_ON_STARTUP=0`` 时不发请求。
 
 运行：``.venv\\Scripts\\python.exe tests\\repo_sync.py``
 """
@@ -95,6 +96,13 @@ try:
 finally:
     config.REPO_BRANCH = real_branch
 
+# 快照文件名时间戳解析与 API 地址拼接（纯函数，无需网络/数据库）
+check("文件名时间戳解析",
+      reposync._name_stamp("summary_20261013_133124.json") == "2026-10-13T13:31:24")
+check("文件名时间戳（含随机后缀）",
+      reposync._name_stamp("summary_20261013_133124_abcd.json") == "2026-10-13T13:31:24")
+check("Contents API 地址", "/contents/data/snapshots?ref=" in reposync.api_contents_url("o/r"))
+
 # ------------------------------------------------------------------ 3) 新旧判定
 real_latest = storage.latest_snapshot
 storage.latest_snapshot = lambda: {"fetched_at": "2026-10-11T12:00:00+08:00"}
@@ -163,6 +171,11 @@ async def boom(slug):
     raise AssertionError("开关关闭时不应访问仓库")
 
 
+async def fake_no_names(slug):
+    """默认不让历史目录同步走真实网络（自检标榜“无需网络”）。"""
+    return []
+
+
 def boom_now(*_a, **_kw):
     raise AssertionError("开关关闭时不应访问仓库")
 
@@ -170,10 +183,12 @@ def boom_now(*_a, **_kw):
 storage.init_db()
 count0 = storage.snapshot_count()
 real_slug, real_fetch = reposync.detect_slug, reposync.fetch_repo_payload
+real_list = reposync._list_snapshot_names
 real_flag = config.SYNC_REPO_ON_STARTUP
 try:
     reposync.detect_slug = lambda: "o/r"
     reposync.fetch_repo_payload = fake_found
+    reposync._list_snapshot_names = fake_no_names
 
     r1 = asyncio.run(reposync.sync_once())
     check("空库时导入仓库数据", r1.get("ok") is True and "skipped" not in r1)
@@ -219,16 +234,25 @@ try:
     check("同步异常被吞掉并降级", r6.get("ok") is False and r6.get("skipped") is True)
 finally:
     reposync.detect_slug, reposync.fetch_repo_payload = real_slug, real_fetch
+    reposync._list_snapshot_names = real_list
     config.SYNC_REPO_ON_STARTUP = real_flag
     for attr, value in real_paths.items():
         setattr(config, attr, value)
     drop_tmp(tmp)
 
-# ------------------------------------------------------------------ 5) 启动流程已接入
+# ------------------------------------------------------------------ 5) 调度器只接入仓库同步（本地抓取已移除）
 src = (BASE / "app" / "scheduler.py").read_text(encoding="utf-8")
-check("异步启动先同步仓库再抓取",
-      src.index("await sync_repo_updates()") < src.index('fetcher.fetch_and_store(source="startup")'))
+check("调度器不再依赖 fetcher（本地抓取已移除）", "fetcher" not in src)
+check("定时任务为仓库同步", "reposync.sync_once_sync()" in src
+      and "REPO_SYNC_INTERVAL_HOURS" in src)
+check("异步启动接入仓库同步", "await sync_repo_updates()" in src)
 check("同步启动同样接入", src.count("_log_repo_sync(") >= 2)
+rsrc = (BASE / "app" / "reposync.py").read_text(encoding="utf-8")
+check("同步结果写入 fetch_status", "write_fetch_status" in rsrc)
+check("同步会增量回填历史目录", "_sync_history" in rsrc and "_list_snapshot_names" in rsrc)
+check("提供本地历史一次性回填入口",
+      "def backfill_from_local" in rsrc and "existing_snapshot_stamps" in rsrc)
+check("启动走本地回填+最新一份", "startup_sync" in src and "backfill_from_local()" in rsrc)
 
 print(f"仓库数据同步自检：通过 {ok} 项，失败 {len(fail)} 项")
 for name in fail:

@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 """启动脚本：``python run.py`` → http://127.0.0.1:8000
 
+本地不再直接抓取 API，数据统一来自 GitHub Actions 定时抓取并提交回仓库的快照。
+
 可用环境变量覆盖：
     POE2_HOST / POE2_PORT          监听地址与端口
-    POE2_API_URL                   数据源地址
-    POE2_FETCH_INTERVAL_HOURS      抓取间隔（小时，默认 1）
-    POE2_FETCH_ON_STARTUP=0        启动时不立即抓取
-    POE2_SYNC_REPO_ON_STARTUP=0    启动时不拉取 GitHub 仓库（Actions）更新的数据
-    POE2_API_TIMEOUT / POE2_API_RETRIES
+    POE2_REPO_SYNC_INTERVAL_HOURS  仓库数据同步间隔（小时，默认 1）
+    POE2_SYNC_REPO_ON_STARTUP=0    启动时不拉取 GitHub 仓库（Actions）数据
+    POE2_REPO_URL / POE2_REPO_BRANCH  仓库地址与分支
+    POE2_API_TIMEOUT               单次请求超时（秒）
 """
 from __future__ import annotations
 
@@ -50,9 +51,8 @@ def main() -> int:
     banner = f"""
 ============================================================
   PoE2 通货价格看板  →  http://{config.HOST}:{config.PORT}
-  数据源   : {config.API_URL}
-  仓库同步 : {'启动时拉取 GitHub 仓库数据' if config.SYNC_REPO_ON_STARTUP else '已关闭'}
-  抓取间隔 : 每 {config.FETCH_INTERVAL_HOURS} 小时
+  数据来源 : GitHub Actions 定时抓取，本地同步仓库数据（不直接抓 API）
+  仓库同步 : {'启动时拉取 + 每 ' + str(config.REPO_SYNC_INTERVAL_HOURS) + ' 小时' if config.SYNC_REPO_ON_STARTUP else '启动时不拉取（仅定时同步）'}
   数据库   : {config.DB_PATH}
   停止服务 : Ctrl + C
 ============================================================

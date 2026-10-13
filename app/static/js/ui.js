@@ -79,15 +79,15 @@
     }
     if (dom.status) {
       const f = meta && meta.fetch;
-      let text = '未抓取', klass = 'badge';
+      let text = '未同步', klass = 'badge';
       if (f) {
-        if (f.ok) { text = '抓取正常'; klass = 'badge badge-ok'; }
-        else { text = '抓取失败'; klass = 'badge badge-err'; }
+        if (f.ok) { text = f.skipped ? '已是最新' : '同步正常'; klass = 'badge badge-ok'; }
+        else { text = '同步失败'; klass = 'badge badge-err'; }
       } else if (meta && meta.ok) { text = '本地数据'; klass = 'badge badge-warn'; }
       dom.status.className = klass;
       dom.status.textContent = text;
       dom.status.title = f && !f.ok ? (f.error || '未知错误') + '\n时间：' + (f.at || '')
-        : (f ? '最近成功：' + (f.at || '') + '，共 ' + (f.item_count || 0) + ' 条' : '尚未执行抓取');
+        : (f ? (f.skipped ? '最近同步：' + (f.at || '') + '（仓库数据不比本地新）' : '最近成功：' + (f.at || '') + '，共 ' + (f.item_count || 0) + ' 条') : '尚未执行仓库同步（数据来源：GitHub Actions）');
     }
     if (dom.footNote) {
       dom.footNote.textContent = meta
@@ -107,29 +107,29 @@
     renderTop();
   }
 
-  /* ------------------------------------------------------------ 刷新按钮 */
+  /* ------------------------------------------------------------ 同步按钮
+     本地不再直接抓取 API：点击后从 GitHub 仓库拉取 Actions 定时抓取的数据。 */
   async function refresh(force) {
     if (!dom.refresh) return null;
     const btn = dom.refresh;
     const old = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<span class="spin">◌</span> 抓取中';
+    btn.innerHTML = '<span class="spin">◌</span> 同步中';
     try {
-      const res = await P.api.refresh();
-      let msg = '抓取成功：' + (res.item_count || 0) + ' 条条目，汇率 ' + P.num(res.d_to_e, 2);
-      if (res.warnings && res.warnings.length) {
-        msg += '<br><span class="muted">' + res.warnings.map((w) => P.escapeHtml(w)).join('<br>') + '</span>';
+      const res = await P.api.syncRepo();
+      let msg;
+      if (res.skipped) {
+        msg = '数据已是最新：' + (res.reason || '仓库数据不比本地更新');
+      } else {
+        msg = '同步成功：' + (res.item_count || 0) + ' 条条目，汇率 ' + P.num(res.d_to_e, 2);
       }
-      toast(msg, 'ok', res.warnings && res.warnings.length ? 9000 : 3200);
+      toast(msg, 'ok', 3200);
       await loadMeta();
       document.dispatchEvent(new CustomEvent('poe:data'));
       return res;
     } catch (err) {
-      if (force) {
-        toast('抓取失败：' + P.escapeHtml(err.message) + '<br><span class="muted">外部接口可能需要代理/VPN；本地快照仍可正常使用。</span>', 'err', 9000);
-      } else {
-        toast('抓取失败：' + P.escapeHtml(err.message), 'err', 8000);
-      }
+      toast('同步失败：' + P.escapeHtml(err.message) +
+        '<br><span class="muted">无法访问 GitHub 仓库？本地已有快照仍可正常查看。</span>', 'err', 8000);
       await loadMeta();
       return null;
     } finally {

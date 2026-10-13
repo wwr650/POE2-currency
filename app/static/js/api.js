@@ -38,7 +38,7 @@
     rateHistory: (hours) => request('/history/rate?hours=' + hours),
     historyItems: (hours) => request('/history/items?hours=' + hours),
     snapshots: () => request('/snapshots'),
-    refresh: () => request('/refresh', { method: 'POST' }),
+    syncRepo: () => request('/sync-repo', { method: 'POST' }),
     health: () => request('/health'),
 
     profitCalculate: (payload) => request('/profit/calculate', { method: 'POST', body: payload }),

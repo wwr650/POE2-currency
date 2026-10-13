@@ -32,6 +32,8 @@ for _d in (DATA_DIR, SNAPSHOT_DIR, LOG_DIR):
     _d.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------- 数据源
+#: 原始价格 API（仅供 GitHub Actions 抓取脚本 scripts/fetch_summary.py 使用，
+#: 本地服务不再直接抓取，统一消费 Actions 提交回仓库的数据）
 API_URL = os.getenv("POE2_API_URL", "https://poecurrency.top/api/summary?version=2")
 API_TIMEOUT = float(os.getenv("POE2_API_TIMEOUT", "15"))
 API_RETRIES = int(os.getenv("POE2_API_RETRIES", "3"))
@@ -41,15 +43,20 @@ USER_AGENT = (
     "(KHTML, like Gecko) Chrome/122.0 Safari/537.36 PoE2Dashboard/1.0"
 )
 
-# ---------------------------------------------------------------- 调度
-FETCH_INTERVAL_HOURS = float(os.getenv("POE2_FETCH_INTERVAL_HOURS", "1"))
-FETCH_ON_STARTUP = os.getenv("POE2_FETCH_ON_STARTUP", "1") not in ("0", "false", "False")
-
 # ---------------------------------------------------------------- 仓库数据同步
+#: 定时同步间隔（小时）：从 GitHub 仓库拉取 Actions 抓取的最新数据
+REPO_SYNC_INTERVAL_HOURS = float(os.getenv("POE2_REPO_SYNC_INTERVAL_HOURS", "1"))
 #: 启动时从 GitHub 仓库拉取 Actions 定时抓取的最新数据（两种启动方式均生效）
 SYNC_REPO_ON_STARTUP = os.getenv("POE2_SYNC_REPO_ON_STARTUP", "1") not in ("0", "false", "False")
 #: 仓库分支（默认 main，可用环境变量覆盖）
 REPO_BRANCH = os.getenv("POE2_REPO_BRANCH", "main")
+#: 定时/手动同步时，是否通过 GitHub API 列出仓库 data/snapshots/ 并增量回填
+#: 本地库缺失的历史快照（关闭后只同步根目录最新一份 summary.json）
+REPO_SYNC_HISTORY = os.getenv("POE2_REPO_SYNC_HISTORY", "1") not in ("0", "false", "False")
+#: 可选：GitHub Token，提升 Contents API 速率限制（匿名 60/小时，带 Token 5000/小时）
+GITHUB_TOKEN = os.getenv("POE2_GITHUB_TOKEN") or os.getenv("GITHUB_TOKEN") or ""
+#: 仓库中历史快照目录（Actions 每小时把抓取结果提交到这里）
+SNAPSHOT_REPO_DIR = "data/snapshots"
 
 # ---------------------------------------------------------------- 服务
 HOST = os.getenv("POE2_HOST", "127.0.0.1")

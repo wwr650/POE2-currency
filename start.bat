@@ -11,7 +11,7 @@ rem  parsing under some console code pages. Chinese messages are
 rem  printed by launcher.py instead.
 rem
 rem  Usage: start.bat [offline] [no-browser] [reload] [--port 8000]
-rem         offline    do not fetch on startup (local data only)
+rem         offline    do not sync repo (GitHub Actions) data on startup
 rem         no-browser do not open the browser
 rem         reload     enable auto reload (development)
 rem ============================================================
