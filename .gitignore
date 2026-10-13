@@ -33,4 +33,9 @@ data/fetch_status.json
 data/summary.json
 data/logs/
 data/*.tmp
+data/edge-profile/
 summary.json.new
+
+# ---------------------------------------------------------------- 本地签名证书（公钥导出，机器私有）
+*.cer
+*.pfx

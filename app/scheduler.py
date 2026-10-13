@@ -62,15 +62,17 @@ def _log_repo_sync(result: dict) -> None:
         level = log.info if result.get("ok") else log.warning
         level("仓库数据同步跳过：%s", result.get("reason"))
     else:
-        log.info("仓库数据同步完成：%s 条，汇率 %s（来自 %s）",
-                 result.get("item_count"), result.get("d_to_e"), result.get("file"))
+        log.info("仓库数据同步完成：%s 条，汇率 %s，数据时间 %s（来自 %s）",
+                 result.get("item_count"), result.get("d_to_e"),
+                 result.get("fetched_at"), result.get("file"))
 
 
 async def sync_repo_updates() -> dict:
     """启动时拉取 GitHub 仓库（Actions）更新的数据，失败不阻止服务。
 
     走启动专用链路：先用本地已 clone 的历史快照回填数据库（无网络、秒级），
-    再同步最新一份；历史目录的增量拉取由定时/手动任务（``sync_once``）负责。
+    再与仓库比对一次，补拉最近缺失的若干份快照并兜底同步最新一份
+    （上限由 ``POE2_REPO_SYNC_STARTUP_HISTORY`` 控制，剩余历史交给定时/手动任务）。
     """
     if not config.SYNC_REPO_ON_STARTUP:
         return {"ok": True, "skipped": True, "reason": "已禁用（POE2_SYNC_REPO_ON_STARTUP=0）"}

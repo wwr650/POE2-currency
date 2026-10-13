@@ -29,12 +29,13 @@
 3. **持续同步任务（本地侧）**
 
    - 使用 APScheduler 的 `BackgroundScheduler`，每 1 小时执行 `reposync.sync_once()`：先通过 GitHub Contents API 列出仓库 `data/snapshots/`，仅下载并入库本地缺失的快照（Action 每抓取成功一次新增一份，自动落入）；再兜底拉取最新一份 `summary.json`。
-   - 应用启动时立即执行一次同步（历史增量回填由定时/手动任务负责，避免首屏大量下载）。
+   - 应用启动时立即执行一次同步（`reposync.startup_sync()`：本地回填 + 增量补拉仓库中缺失的快照，最多最近 `POE2_REPO_SYNC_STARTUP_HISTORY` 份（默认 12），避免首屏大量下载）。启动必须做一次历史比对：根 `summary.json` 的抓取时间是条目推导的整点值，容易判定「不比本地更新」而整体跳过，导致启动拉不到 Actions 新提交的那一份。
    - 任务需容错：列目录/拉取失败时记录日志，不中断调度，服务照常启动。
 4. **入库约束**
 
    - 历史目录用 `api.github.com`、单文件用 `raw.githubusercontent.com`，均为纯 HTTP GET，不需要 git 权限（可选 `POE2_GITHUB_TOKEN` 提高速率）；
-   - 去重以快照 `fetched_at` 的秒级标识为键，同秒视为同一份数据不重复入库；根 `summary.json` 仅在比本地最新时才入库（来源标记 `repo:github(...)`），本地同步不回写根目录 `summary.json`。
+   - 去重以快照 `fetched_at` 的秒级标识为键，同秒视为同一份数据不重复入库；根 `summary.json` 仅在比本地最新时才入库（来源标记 `repo:github(...)`），本地同步不回写根目录 `summary.json`；
+   - 历史回填可能补入更早的快照，自增 `snapshots.id` 不再等于时间顺序，因此「最新一份」（`storage.latest_snapshot()` / `latest_rate()`）按 `datetime(fetched_at) DESC, id DESC` 取。
 5. **文件保存**
 
    - 同步入库写入 SQLite 与 `data/summary.json`（带元数据的最新快照）；历史回填/增量只入库，不重复写 `data/snapshots/`。

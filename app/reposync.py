@@ -12,11 +12,15 @@ poecurrency.top，并把最新 ``summary.json`` 与逐小时历史 ``data/snapsh
       本地库缺失的快照（Action 每次抓取成功后都会新增一份，自动被拉取入库）；
     - 再兜底拉取根 ``summary.json`` 最新一份（列出目录失败时仍能拿到最新）。
 
+启动（``start.bat`` / ``python run.py``）走 ``startup_sync``：本地回填 + 最多补拉
+最近 ``POE2_REPO_SYNC_STARTUP_HISTORY`` 份缺失快照，避免首屏大量下载。
+
 配置（环境变量）：
     POE2_REPO_URL / POE2_REPO_SLUG   仓库地址，缺省自动从 ``git remote origin`` 识别
     POE2_REPO_BRANCH                 分支名（默认 main）
     POE2_SYNC_REPO_ON_STARTUP=0      关闭启动同步
     POE2_REPO_SYNC_HISTORY=0         关闭历史目录增量回填（只同步最新一份）
+    POE2_REPO_SYNC_STARTUP_HISTORY   启动时最多补拉多少份缺失快照（默认 12，0=不补拉）
     POE2_GITHUB_TOKEN                提升 Contents API 速率限制（可选）
 
 去重以快照 ``fetched_at`` 的秒级标识为键，同秒视为同一份数据不重复入库；
@@ -183,7 +187,10 @@ async def _list_snapshot_names(slug: str) -> list[str]:
         async with httpx.AsyncClient(timeout=15, follow_redirects=True) as client:
             response = await client.get(api_contents_url(slug), headers=headers)
             if response.status_code != 200:
-                log.debug("列出仓库快照目录失败（HTTP %s）", response.status_code)
+                # 常见原因：匿名访问触发了速率限制（403/429），或仓库/分支不对、路径不存在
+                log.warning(
+                    "列出仓库快照目录失败（HTTP %s），本次只能兜底同步最新一份；"
+                    "可设置 POE2_GITHUB_TOKEN 提升速率限制", response.status_code)
                 return []
             entries = response.json()
     except Exception as exc:  # noqa: BLE001
@@ -214,14 +221,23 @@ async def _download_snapshot(slug: str, name: str) -> Any | None:
         return None
 
 
-async def _sync_history(slug: str) -> dict[str, Any]:
-    """增量回填：仅下载并入库本地库缺失的仓库历史快照（Action 新抓取即被拉取）。"""
+async def _sync_history(slug: str, *, limit: int | None = None) -> dict[str, Any]:
+    """增量回填：仅下载并入库本地库缺失的仓库历史快照（Action 新抓取即被拉取）。
+
+    ``limit`` 为正数时只补拉「缺失列表中时间最新的 N 份」（启动路径用，避免首屏大量下载）；
+    ``limit`` 为 0 或负数时不做历史比对；入库仍按时间升序，保证后写入的是较新的一份。
+    """
+    if limit is not None and limit <= 0:
+        return {"history_checked": 0, "history_pending": 0, "history_ingested": 0}
     names = await _list_snapshot_names(slug)
     if not names:
         return {"history_checked": 0, "history_ingested": 0}
     storage.init_db()
     existing = storage.existing_snapshot_stamps()
     todo = [n for n in names if (_name_stamp(n) or "") not in existing]
+    checked = len(todo)
+    if limit and limit > 0 and len(todo) > limit:
+        todo = todo[-limit:]
     ingested = 0
     for name in todo:
         payload = await _download_snapshot(slug, name)
@@ -235,8 +251,8 @@ async def _sync_history(slug: str) -> dict[str, Any]:
         if res and not res.get("skipped_dup"):
             ingested += 1
     if ingested:
-        log.info("历史快照增量回填：新增 %s 条（待补 %s 份）", ingested, len(todo))
-    return {"history_checked": len(names), "history_pending": len(todo), "history_ingested": ingested}
+        log.info("历史快照增量回填：新增 %s 条（待补 %s 份）", ingested, checked)
+    return {"history_checked": len(names), "history_pending": checked, "history_ingested": ingested}
 
 
 async def _sync_latest(slug: str) -> dict[str, Any]:
@@ -265,25 +281,26 @@ async def _sync_latest(slug: str) -> dict[str, Any]:
     return {"ok": True, "slug": slug, "file": found["path"], **summary}
 
 
-async def sync_once(*, history: bool = True) -> dict[str, Any]:
+async def sync_once(*, history: bool = True, history_limit: int | None = None) -> dict[str, Any]:
     """执行一次仓库同步并记录同步状态，返回状态字典（不抛异常）。
 
     ``history=True``：先增量回填缺失历史，再兜底同步最新一份；
-    ``history=False``：只同步最新一份（启动路径用，避免首屏大量下载）。
+    ``history=False``：只同步最新一份；
+    ``history_limit``：回填时最多补拉最近 N 份缺失快照（None 表示不限）。
     """
-    result = await _sync_once(history=history)
+    result = await _sync_once(history=history, history_limit=history_limit)
     _write_sync_status(result)
     return result
 
 
-async def _sync_once(*, history: bool = True) -> dict[str, Any]:
+async def _sync_once(*, history: bool = True, history_limit: int | None = None) -> dict[str, Any]:
     slug = detect_slug()
     if not slug:
         return {"ok": False, "skipped": True, "reason": "未能识别 GitHub 仓库地址（可设置 POE2_REPO_URL）"}
     hist: dict[str, Any] = {"history_checked": 0, "history_ingested": 0}
     if history:
         try:
-            hist = await _sync_history(slug)
+            hist = await _sync_history(slug, limit=history_limit)
         except Exception as exc:  # noqa: BLE001
             log.debug("历史增量回填跳过：%s", exc)
     latest = await _sync_latest(slug)
@@ -292,7 +309,23 @@ async def _sync_once(*, history: bool = True) -> dict[str, Any]:
     if hist.get("history_ingested"):
         merged["ok"] = True
         merged.pop("skipped", None)
+        merged.pop("reason", None)  # 根目录「不比本地更新」的跳过原因已不代表本次结果
         merged.setdefault("slug", slug)
+        merged["file"] = f"{config.SNAPSHOT_REPO_DIR}(补拉 {hist['history_ingested']} 份)"
+        if merged.get("item_count") is None:
+            snap = storage.latest_snapshot() or {}
+            merged["item_count"] = snap.get("item_count")
+            merged["d_to_e"] = snap.get("d_to_e")
+            merged["fetched_at"] = snap.get("fetched_at")
+    elif merged.get("ok") and merged.get("skipped"):
+        # 确实无新增：把「比对过仓库」这一事实写清楚，日志才不会看起来像「没去拉数据」
+        base = str(merged.get("reason") or "仓库数据不比本地更新")
+        if hist.get("history_checked"):
+            base = (
+                f"已比对仓库 {hist['history_checked']} 份历史快照"
+                f"（本地缺失 {hist.get('history_pending', 0)} 份）：{base}"
+            )
+        merged["reason"] = base
     return merged
 
 
@@ -309,6 +342,9 @@ def _write_sync_status(result: dict[str, Any]) -> None:
         "skipped": bool(result.get("skipped")),
         "item_count": result.get("item_count"),
         "d_to_e": result.get("d_to_e"),
+        "history_checked": result.get("history_checked"),
+        "history_pending": result.get("history_pending"),
+        "history_ingested": result.get("history_ingested"),
     }
     if status["item_count"] is None or status["d_to_e"] is None:
         snap = storage.latest_snapshot() or {}
@@ -316,6 +352,9 @@ def _write_sync_status(result: dict[str, Any]) -> None:
         status["d_to_e"] = snap.get("d_to_e")
     if not result.get("ok"):
         status["error"] = result.get("reason") or "仓库同步失败"
+    elif result.get("skipped"):
+        # 跳过也算一次成功同步，把原因写出来，看板才不会显示成「没拉取」
+        status["reason"] = result.get("reason")
     storage.write_fetch_status(status)
 
 
@@ -328,9 +367,15 @@ def sync_once_sync(*, history: bool = True) -> dict[str, Any]:
 
 async def startup_sync() -> dict[str, Any]:
     """启动路径：先用本地已 clone 的历史快照快速回填（无网络），
-    再同步最新一份；历史目录的增量回填交给定时/手动任务。"""
+    再向仓库比对一次并补拉最近缺失的若干份快照 + 兜底同步最新一份。
+
+    启动时必须做一次历史比对：根目录 ``summary.json`` 的抓取时间是数据条目里
+    推导出的整点值，很容易判定为「不比本地更新」而整体跳过，导致双击
+    ``start.bat`` 后看起来完全没有拉取仓库数据。快照文件名时间戳是精确到秒的，
+    以它为准增量补拉才能可靠拿到 Actions 新提交的那一份。
+    """
     backfill_from_local()
-    return await sync_once(history=False)
+    return await sync_once(history=True, history_limit=config.REPO_SYNC_STARTUP_HISTORY)
 
 
 def startup_sync_sync() -> dict[str, Any]:

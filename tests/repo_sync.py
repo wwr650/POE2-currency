@@ -9,6 +9,8 @@
    拉取失败不入库也不抛异常；
 5. 启动流程：``scheduler`` 只做仓库同步（本地抓取已移除）；
    ``POE2_SYNC_REPO_ON_STARTUP=0`` 时不发请求。
+6. 启动链路会向仓库比对并补拉缺失的历史快照（受 ``POE2_REPO_SYNC_STARTUP_HISTORY``
+   上限约束），且「最新一份」按 ``fetched_at`` 取，补入旧快照不会让看板回退。
 
 运行：``.venv\\Scripts\\python.exe tests\\repo_sync.py``
 """
@@ -25,6 +27,13 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE))
+
+# 失败列表里有「✗」，GBK 控制台下直接 print 会报错并遮没真正的问题
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:  # noqa: BLE001 - 已被重定向等场景，忽略
+        pass
 
 ok = 0
 fail: list[str] = []
@@ -240,6 +249,106 @@ finally:
         setattr(config, attr, value)
     drop_tmp(tmp)
 
+# ------------------------------------------------- 4b) 启动补拉缺失历史 + 「最新一份」按时间取
+tmp2 = Path(tempfile.mkdtemp(prefix="poe2_startup_sync_"))
+config.DATA_DIR = tmp2
+config.SNAPSHOT_DIR = tmp2 / "snapshots"
+config.LOG_DIR = tmp2 / "logs"
+config.DB_PATH = tmp2 / "prices.db"
+config.INDEX_JSON = tmp2 / "index.json"
+config.LATEST_JSON = tmp2 / "summary.json"
+config.LATEST_META_JSON = tmp2 / "data_summary.json"
+config.SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def envelope(stamp: str) -> dict:
+    """造一份与仓库 ``data/snapshots/`` 同构的信封（带 fetched_at 元数据）。"""
+    d, t = stamp.split("_")
+    return {
+        "fetched_at": f"{d[0:4]}-{d[4:6]}-{d[6:8]}T{t[0:2]}:{t[2:4]}:{t[4:6]}+08:00",
+        "source": "github-actions", "data": FAKE_GROUPS,
+    }
+
+
+STAMPS3 = ["20261011_080000", "20261011_090000", "20261011_100000"]
+STAMPS5 = ["20261011_060000", "20261011_070000"] + STAMPS3
+
+
+async def names_of(*stamps: str):
+    return [f"summary_{s}.json" for s in stamps[0]]
+
+
+async def download_of(*stamps: str):
+    return envelope(str(stamps[1])[len("summary_"):-len(".json")])
+
+
+real_download = reposync._download_snapshot
+real_limit = config.REPO_SYNC_STARTUP_HISTORY
+try:
+    reposync.detect_slug = lambda: "o/r"
+    reposync.fetch_repo_payload = fake_missing  # 根 summary 拉不到：只能靠历史比对
+    reposync._list_snapshot_names = lambda slug: names_of(STAMPS3)
+    reposync._download_snapshot = lambda slug, name: download_of(STAMPS3, name)
+    storage.init_db()
+
+    r = asyncio.run(reposync.startup_sync())
+    check("启动会补拉仓库缺失的历史快照", r.get("history_ingested") == 3 and storage.snapshot_count() == 3)
+    check("补拉即视为同步成功（根文件拉不到也不跳过）", r.get("ok") is True and not r.get("skipped"))
+    check("同步来源标注为快照目录", str(r.get("file")).startswith("data/snapshots"))
+    check("最新一份按时间而非入库顺序",
+          str(storage.latest_snapshot()["fetched_at"]).startswith("2026-10-11T10:00"))
+    check("最新汇率同样按时间取",
+          str((storage.latest_rate() or {}).get("fetched_at")).startswith("2026-10-11T10:00"))
+
+    r = asyncio.run(reposync.startup_sync())
+    check("重复启动不重复下载", r.get("history_ingested") == 0 and storage.snapshot_count() == 3)
+
+    # 仓库确实无新增（根文件不比本地新）时，跳过原因要说明「已经比对过仓库」
+    reposync.fetch_repo_payload = fake_found
+    r = asyncio.run(reposync.startup_sync())
+    check("无新增时仍为一次成功同步", r.get("ok") is True and r.get("skipped") is True)
+    check("无新增时说明已比对仓库", "已比对仓库 3 份" in str(r.get("reason")))
+    reposync.fetch_repo_payload = fake_missing
+
+    # 上限生效：只补拉最近 N 份，且补入更早的快照不会让「最新一份」回退
+    config.DB_PATH = tmp2 / "prices2.db"
+    config.REPO_SYNC_STARTUP_HISTORY = 2
+    reposync._list_snapshot_names = lambda slug: names_of(STAMPS5)
+    reposync._download_snapshot = lambda slug, name: download_of(STAMPS5, name)
+    storage.init_db()
+
+    r = asyncio.run(reposync.startup_sync())
+    check("启动补拉受上限约束", r.get("history_ingested") == 2 and storage.snapshot_count() == 2)
+    check("上限内优先补最新的", sorted(storage.existing_snapshot_stamps())
+          == ["2026-10-11T09:00:00", "2026-10-11T10:00:00"])
+    r = asyncio.run(reposync.startup_sync())
+    check("下一轮继续补更早的缺口", r.get("history_ingested") == 2 and storage.snapshot_count() == 4)
+    check("补入更早快照后最新一份不回退",
+          str(storage.latest_snapshot()["fetched_at"]).startswith("2026-10-11T10:00"))
+
+    # 上限为 0：启动不列历史目录，只同步最新一份
+    config.DB_PATH = tmp2 / "prices3.db"
+    config.REPO_SYNC_STARTUP_HISTORY = 0
+    storage.init_db()
+
+    listed: list[str] = []
+
+    async def spy_list(slug):
+        listed.append(slug)
+        return []
+
+    reposync._list_snapshot_names = spy_list
+    r = asyncio.run(reposync.startup_sync())
+    check("上限为 0 时不列历史目录", not listed and r.get("history_checked") == 0)
+    check("上限为 0 时仍会兜底拉最新一份", r.get("ok") is False and bool(r.get("reason")))
+finally:
+    reposync.detect_slug, reposync.fetch_repo_payload = real_slug, real_fetch
+    reposync._list_snapshot_names, reposync._download_snapshot = real_list, real_download
+    config.REPO_SYNC_STARTUP_HISTORY = real_limit
+    for attr, value in real_paths.items():
+        setattr(config, attr, value)
+    drop_tmp(tmp2)
+
 # ------------------------------------------------------------------ 5) 调度器只接入仓库同步（本地抓取已移除）
 src = (BASE / "app" / "scheduler.py").read_text(encoding="utf-8")
 check("调度器不再依赖 fetcher（本地抓取已移除）", "fetcher" not in src)
@@ -252,7 +361,10 @@ check("同步结果写入 fetch_status", "write_fetch_status" in rsrc)
 check("同步会增量回填历史目录", "_sync_history" in rsrc and "_list_snapshot_names" in rsrc)
 check("提供本地历史一次性回填入口",
       "def backfill_from_local" in rsrc and "existing_snapshot_stamps" in rsrc)
-check("启动走本地回填+最新一份", "startup_sync" in src and "backfill_from_local()" in rsrc)
+check("启动走本地回填+仓库历史比对",
+      "startup_sync" in src and "backfill_from_local()" in rsrc
+      and "history_limit=config.REPO_SYNC_STARTUP_HISTORY" in rsrc)
+check("启动补拉份数可配置", "REPO_SYNC_STARTUP_HISTORY" in (BASE / "app" / "config.py").read_text(encoding="utf-8"))
 
 print(f"仓库数据同步自检：通过 {ok} 项，失败 {len(fail)} 项")
 for name in fail:

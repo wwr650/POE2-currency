@@ -19,10 +19,24 @@
 
 双击项目根目录的 **`start.bat`**，剩下的全自动：
 
-1. 找不到 `.venv` 就用系统 Python 自动创建；
-2. 依赖不全自动 `pip install -r requirements.txt`（已装好则跳过，不联网）；
-3. 启动时从 GitHub 仓库拉取 Actions 定时抓取的最新数据（见 [1.1](#11-仓库数据同步本地唯一数据来源)）；
-4. 启动服务，并在端口就绪后自动打开浏览器 <http://127.0.0.1:8000>。
+1. `start.bat` 先校验 **`start.ps1`** 的 Authenticode 签名（Valid 直接运行；未签名会提示并倒计时 3 秒后继续；被篡改则拒绝启动）；
+2. `start.ps1` 探测可用的 Python ≥ 3.9（自动跳过 Windows 商店占位符，兼容 pyenv-win 垫片，`.venv` 兜底），再交给 `launcher.py`；
+3. 找不到 `.venv` 就用系统 Python 自动创建；
+4. 依赖不全自动 `pip install -r requirements.txt`（已装好则跳过，不联网）；
+5. 启动时从 GitHub 仓库拉取 Actions 定时抓取的最新数据（见 [1.1](#11-仓库数据同步本地唯一数据来源)）；
+6. 启动服务，并在端口就绪后用**独立实例的 Edge**（专属 `data/edge-profile` 用户数据目录）自动打开 <http://127.0.0.1:8000>。
+   独立实例不会附着到你日常使用的 Edge 单例进程，彻底避免「因为现有实例正在以提升的权限运行」弹窗。
+
+> 签名相关：Windows 对 `.bat` 没有 Authenticode SIP（批处理无法直接签名），
+> 所以签名放在真正的启动器 `start.ps1` 上。首次拉取代码后执行一次即可：
+>
+> ```powershell
+> powershell -ExecutionPolicy Bypass -File scripts\sign-start.ps1
+> ```
+>
+> 它会创建/复用自签证书 `CN=PoE2-Currency-Local`（当前用户存储，无需管理员），
+> 签名 `start.ps1` 并把证书加入「受信任的根/受信任的发布者」。
+> 之后每次修改 `start.ps1` 都需要重新执行该脚本，否则 `start.bat` 会拒绝启动。
 
 启动日志里的每一个阶段（虚拟环境、依赖、服务启动）与失败原因都会用中文写清楚，
 出错时会 `pause` 停住不闪退；停止服务按 `Ctrl + C` 或直接关掉窗口。
@@ -39,6 +53,7 @@
 | `start.bat offline no-browser` | 参数可组合 |
 
 > 只想用命令行也可以直接 `python launcher.py`（用系统 Python 跑即可，它自己会找到虚拟环境）。
+> 也可以直接 `powershell -ExecutionPolicy Bypass -File start.ps1 [参数]`（绕过 `.bat` 壳，但会跳过壳层的签名闸门，`start.ps1` 自身仍会校验签名）。
 > 双击时若被 Windows SmartScreen 拦下，选择「仍要运行」；也可以右键 `start.bat` → 发送到 → 桌面快捷方式，
 > 做一个桌面启动图标。
 
@@ -59,7 +74,8 @@ python run.py            # 加 --open 可在启动后自动打开浏览器
 > 说明：本地服务不直接抓取 `poecurrency.top`（无需代理/VPN），
 > 数据统一来自 GitHub Actions 定时抓取并提交回仓库的快照；
 > 启动时会**自动把仓库已随 clone 到本地的历史快照一次性回填进库**（补齐趋势图），
-> 并拉取最新一份；之后每小时增量同步一次，也可点击顶部「同步数据」手动拉取。
+> 并向仓库比对一次、补拉本地缺失的最近若干份快照（默认 12 份）+ 最新一份；
+> 之后每小时增量同步一次，也可点击顶部「同步数据」手动拉取。
 
 ### 1.1 仓库数据同步（本地唯一数据来源）
 
@@ -85,9 +101,13 @@ Actions 积累的逐小时历史随仓库 clone 到本地 `data/snapshots/`。`r
 2. 通过 GitHub Contents API 列出仓库 `data/snapshots/`，**只下载并入库本地缺失的快照**
    （Action 每成功抓取一次就多提交一份，下一次同步即自动拉取入库；停机期间的历史缺口也会被补齐）；
 3. 再兜底纯 HTTP GET 拉取最新一份 `data/summary.json` / `summary.json`，仅当比本地最新**更新**时入库
-   （列出目录失败时仍能拿到最新，**不需要 git 权限**）；
+   （列出目录失败时仍能拿到最新，**不需要 git 权限**）。
+   注意根 `summary.json` 是不带元数据的原始数组，其「抓取时间」由条目里最新的 `latest_datetime`
+   推导（常为整点），很容易被判成「不比本地更新」而跳过——所以**启动时也会做一次第 2 步的历史比对**，
+   以快照文件名里精确到秒的时间戳为准，可靠地拿到 Actions 刚提交的那一份；
 4. 去重以快照 `fetched_at` 的秒级标识为键，同秒视为同一份数据不重复入库；
-5. 拉不到（无网络 / 非 GitHub 仓库 / 已关闭开关）只记一条日志，服务照常启动。
+5. 看板展示的「最新一份」按 `fetched_at` 排序（不是入库顺序），因此补拉旧快照也不会让概览回退到旧数据；
+6. 拉不到（无网络 / 非 GitHub 仓库 / 已关闭开关）只记一条日志，服务照常启动。
 
 可用开关：
 
@@ -95,6 +115,7 @@ Actions 积累的逐小时历史随仓库 clone 到本地 `data/snapshots/`。`r
 $env:POE2_SYNC_REPO_ON_STARTUP = "0"        # 关闭启动时的仓库同步（定时同步仍会执行）
 $env:POE2_REPO_SYNC_INTERVAL_HOURS = "1"    # 定时同步间隔（小时，支持小数；0 以下则不启用定时同步）
 $env:POE2_REPO_SYNC_HISTORY = "0"           # 关闭历史目录增量回填（只同步最新一份 summary.json）
+$env:POE2_REPO_SYNC_STARTUP_HISTORY = "12"   # 启动时最多补拉多少份缺失快照（0 = 启动只同步最新一份）
 $env:POE2_GITHUB_TOKEN = "ghp_..."          # 可选：提升 Contents API 速率限制（匿名 60/小时 → 带 Token 5000/小时）
 $env:POE2_REPO_URL = "https://github.com/owner/repo"   # 手动指定仓库
 $env:POE2_REPO_BRANCH = "main"             # 分支（默认 main）
@@ -206,7 +227,8 @@ POE2-currency/
    抓取管线）→ 把最新数据提交回仓库（根目录 `summary.json` + 逐小时历史 `data/snapshots/`）。
 2. 本地服务启动时先导入已有 `summary.json` 作为基线快照，再执行 `reposync.startup_sync()`：
    **先把仓库已随 clone 到本地的 `data/snapshots/` 历史快照一次性去重回填进 SQLite**
-   （`backfill_from_local`，无网络、幂等，补齐趋势图），再拉取一次最新一份；
+   （`backfill_from_local`，无网络、幂等，补齐趋势图），再列出仓库历史目录、
+   **只补拉本地缺失的最近 `POE2_REPO_SYNC_STARTUP_HISTORY`（默认 12）份快照**，最后兜底同步最新一份；
    之后 `BackgroundScheduler` 每 1 小时执行 `sync_once`：**列出仓库历史目录、仅下载并入库
    本地缺失的快照**（Action 每次抓取成功后自动落入），再兜底同步最新一份（可用环境变量调整/关闭）。
 3. 入库 → 解析 → 提取汇率 → 写入 SQLite（`snapshots` / `prices` / `rates`）；
@@ -396,6 +418,7 @@ node tests\dashboard-columns.js
 | `POE2_REPO_URL` | 自动从 `git remote` 识别 | 形如 `https://github.com/owner/repo`，非 git 克隆目录时手动指定 |
 | `POE2_REPO_BRANCH` | `main` | 仓库同步读取的分支 |
 | `POE2_REPO_SYNC_HISTORY` | `1` | 设为 `0` 则关闭历史目录（`data/snapshots/`）增量回填，只同步最新一份 |
+| `POE2_REPO_SYNC_STARTUP_HISTORY` | `12` | 启动时最多补拉多少份缺失快照（`0` 则启动只同步最新一份，缺口留给定时/手动同步） |
 | `POE2_GITHUB_TOKEN` / `GITHUB_TOKEN` | 空 | 可选；提升 GitHub Contents API 速率限制（匿名 60/小时 → 5000/小时） |
 | `POE2_API_TIMEOUT` | `15` | 单次请求超时（秒，仓库同步与 Actions 抓取脚本共用） |
 | `POE2_API_URL` / `POE2_API_RETRIES` / `POE2_API_BACKOFF` | 见 `app/config.py` | 仅 GitHub Actions 抓取脚本（`scripts/fetch_summary.py`）使用，本地服务不再直接抓 API |

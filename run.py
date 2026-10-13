@@ -7,20 +7,86 @@
     POE2_HOST / POE2_PORT          监听地址与端口
     POE2_REPO_SYNC_INTERVAL_HOURS  仓库数据同步间隔（小时，默认 1）
     POE2_SYNC_REPO_ON_STARTUP=0    启动时不拉取 GitHub 仓库（Actions）数据
+    POE2_REPO_SYNC_STARTUP_HISTORY 启动时最多补拉多少份缺失历史快照（默认 12）
     POE2_REPO_URL / POE2_REPO_BRANCH  仓库地址与分支
     POE2_API_TIMEOUT               单次请求超时（秒）
 """
 from __future__ import annotations
 
+import os
 import socket
+import subprocess
 import sys
 import threading
 import time
 import webbrowser
+from pathlib import Path
 
 import uvicorn
 
 from app import config
+
+
+def find_msedge() -> str | None:
+    """定位 msedge.exe：先查注册表 App Paths，再试常见安装目录。"""
+    if os.name != "nt":
+        return None
+    try:
+        import winreg
+
+        subkeys = (
+            r"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe",
+            r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\App Paths\msedge.exe",
+        )
+        for hive in (winreg.HKEY_CURRENT_USER, winreg.HKEY_LOCAL_MACHINE):
+            for sub in subkeys:
+                try:
+                    with winreg.OpenKey(hive, sub) as key:
+                        value, _ = winreg.QueryValueEx(key, "")
+                        if value and Path(value).is_file():
+                            return str(value)
+                except OSError:
+                    continue
+    except Exception:
+        pass
+    for env in ("ProgramFiles(x86)", "ProgramFiles"):
+        root = os.environ.get(env)
+        if root:
+            exe = Path(root) / "Microsoft" / "Edge" / "Application" / "msedge.exe"
+            if exe.is_file():
+                return str(exe)
+    return None
+
+
+def open_in_edge_isolated(url: str) -> bool:
+    """用独立实例打开 Edge（专属 --user-data-dir），规避权限弹窗。
+
+    webbrowser.open 会让新启动的 Edge 附着到用户已有的单实例进程；
+    一旦后台残留不同权限等级的 msedge.exe（例如曾以管理员身份启动过），
+    就会弹出「因为现有实例正在以提升的权限运行」。指定独立的
+    user-data-dir 后 Windows 会全新拉起一个进程，不与任何现有实例
+    共享单例，无论权限是否一致都不会弹窗。
+    """
+    exe = find_msedge()
+    if not exe:
+        return False
+    profile = config.DATA_DIR / "edge-profile"
+    profile.mkdir(parents=True, exist_ok=True)
+    try:
+        subprocess.Popen(
+            [
+                exe,
+                f"--user-data-dir={profile}",
+                "--no-first-run",
+                "--no-default-browser-check",
+                url,
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return True
+    except OSError:
+        return False
 
 
 def open_when_ready(host: str, port: int, timeout: float = 30.0) -> None:
@@ -39,9 +105,13 @@ def open_when_ready(host: str, port: int, timeout: float = 30.0) -> None:
                     break
             except OSError:
                 time.sleep(0.3)
-        try:
-            webbrowser.open(url)
-        except Exception:
+        opened = open_in_edge_isolated(url)
+        if not opened:
+            try:
+                opened = webbrowser.open(url)
+            except Exception:
+                opened = False
+        if not opened:
             print(f"无法自动打开浏览器，请手动访问 {url}")
 
     threading.Thread(target=worker, daemon=True).start()

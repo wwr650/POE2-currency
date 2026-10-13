@@ -53,6 +53,10 @@ REPO_BRANCH = os.getenv("POE2_REPO_BRANCH", "main")
 #: 定时/手动同步时，是否通过 GitHub API 列出仓库 data/snapshots/ 并增量回填
 #: 本地库缺失的历史快照（关闭后只同步根目录最新一份 summary.json）
 REPO_SYNC_HISTORY = os.getenv("POE2_REPO_SYNC_HISTORY", "1") not in ("0", "false", "False")
+#: 启动同步时最多补拉最近多少份缺失快照（设为 0 则启动时只同步最新一份 summary.json，
+#: 缺失历史交给定时/手动同步）。默认 12 份（约 12 小时），既不会拖慢首屏，
+#: 又能保证双击 start.bat 后看板拿到 Actions 最新提交的数据
+REPO_SYNC_STARTUP_HISTORY = int(os.getenv("POE2_REPO_SYNC_STARTUP_HISTORY", "12"))
 #: 可选：GitHub Token，提升 Contents API 速率限制（匿名 60/小时，带 Token 5000/小时）
 GITHUB_TOKEN = os.getenv("POE2_GITHUB_TOKEN") or os.getenv("GITHUB_TOKEN") or ""
 #: 仓库中历史快照目录（Actions 每小时把抓取结果提交到这里）

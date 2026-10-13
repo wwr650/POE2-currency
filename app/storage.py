@@ -325,9 +325,15 @@ def _rebuild_category_array(groups: Sequence[tuple[str, list[dict[str, Any]]]]) 
 
 
 # ------------------------------------------------------------------ 读取
+#: 按抓取时间排序的表达式：历史回填可能补入更早的快照，自增 id 不再等于时间顺序，
+#: 因此「最新一份」以 ``fetched_at`` 为准（``datetime()`` 会先把带时区的 ISO 串归一到 UTC）
+_LATEST_ORDER = "ORDER BY datetime(fetched_at) DESC, id DESC"
+
+
 def latest_snapshot() -> dict[str, Any] | None:
     with _LOCK, connect() as conn:
-        row = conn.execute("SELECT * FROM snapshots ORDER BY id DESC LIMIT 1").fetchone()
+        row = conn.execute(
+            f"SELECT * FROM snapshots {_LATEST_ORDER} LIMIT 1").fetchone()
     return dict(row) if row else None
 
 
@@ -336,7 +342,7 @@ def latest_rate() -> dict[str, Any] | None:
         row = conn.execute(
             "SELECT r.snapshot_id, r.d_to_e, r.source, r.fetched_at FROM rates r"
             " JOIN snapshots s ON s.id = r.snapshot_id WHERE r.d_to_e IS NOT NULL"
-            " ORDER BY r.snapshot_id DESC LIMIT 1"
+            " ORDER BY datetime(s.fetched_at) DESC, r.snapshot_id DESC LIMIT 1"
         ).fetchone()
     return dict(row) if row else None
 
