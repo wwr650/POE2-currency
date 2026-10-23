@@ -7355,11 +7355,11 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/AddedWardNormal.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 88,
+        "buy_avg_yesterday": 2,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
-        "latest_buy1": 88,
+        "latest_buy1": 2,
         "latest_sell1": 0,
         "latest_datetime": "2026-10-22 23:00:00",
         "prev_buy1": 0,
@@ -7370,7 +7370,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 88,
+        "buy_avg_24h": 2,
         "sell_avg_24h": 0
       },
       {
