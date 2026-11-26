@@ -32,8 +32,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AnnullOrb.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.5850000000000001,
-        "sell_avg_yesterday": 0.5033333333333333,
+        "buy_avg_yesterday": 0.596,
+        "sell_avg_yesterday": 0.5,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 0.6,
@@ -47,8 +47,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.5850000000000001,
-        "sell_avg_24h": 0.5033333333333333
+        "buy_avg_24h": 0.596,
+        "sell_avg_24h": 0.5
       },
       {
         "item_name": "卡兰德的魔镜",
@@ -56,8 +56,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyDuplicate.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 1752,
-        "sell_avg_yesterday": 1642.1666666666667,
+        "buy_avg_yesterday": 1753.4,
+        "sell_avg_yesterday": 1643.6,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 1749,
@@ -71,8 +71,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 1752,
-        "sell_avg_24h": 1642.1666666666667
+        "buy_avg_24h": 1753.4,
+        "sell_avg_24h": 1643.6
       },
       {
         "item_name": "增幅石",
@@ -176,8 +176,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyAddModToRare.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 3.9583333333333335,
-        "sell_avg_yesterday": 3.533333333333333,
+        "buy_avg_yesterday": 3.95,
+        "sell_avg_yesterday": 3.54,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 3.75,
@@ -191,8 +191,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 3.9583333333333335,
-        "sell_avg_24h": 3.533333333333333
+        "buy_avg_24h": 3.95,
+        "sell_avg_24h": 3.54
       },
       {
         "item_name": "完美工匠石",
@@ -224,7 +224,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/CurrencyRerollRare.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 16.166666666666668,
+        "buy_avg_yesterday": 16.4,
         "sell_avg_yesterday": 13,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -239,7 +239,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 16.166666666666668,
+        "buy_avg_24h": 16.4,
         "sell_avg_24h": 13
       },
       {
@@ -512,8 +512,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/FracturingOrb.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 9.063333333333334,
-        "sell_avg_yesterday": 8.748333333333333,
+        "buy_avg_yesterday": 9.076,
+        "sell_avg_yesterday": 8.738000000000001,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 9,
@@ -527,8 +527,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 9.063333333333334,
-        "sell_avg_24h": 8.748333333333333
+        "buy_avg_24h": 9.076,
+        "sell_avg_24h": 8.738000000000001
       },
       {
         "item_name": "磨刀石",
@@ -633,7 +633,7 @@
         "buy_avg": 0,
         "sell_avg": 0,
         "buy_avg_yesterday": 1840,
-        "sell_avg_yesterday": 1757,
+        "sell_avg_yesterday": 1757.8,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 1840,
@@ -648,7 +648,7 @@
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
         "buy_avg_24h": 1840,
-        "sell_avg_24h": 1757
+        "sell_avg_24h": 1757.8
       },
       {
         "item_name": "高等工匠石",
@@ -997,8 +997,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystCaster.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 17.648333333333333,
-        "sell_avg_yesterday": 13.5,
+        "buy_avg_yesterday": 17.378,
+        "sell_avg_yesterday": 13.2,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 17,
@@ -1012,8 +1012,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 17.648333333333333,
-        "sell_avg_24h": 13.5
+        "buy_avg_24h": 17.378,
+        "sell_avg_24h": 13.2
       },
       {
         "item_name": "精炼夏乌拉催化剂",
@@ -1237,8 +1237,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Breach/JewelCatalystAttack.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 10.983333333333334,
-        "sell_avg_yesterday": 5.5,
+        "buy_avg_yesterday": 10.2,
+        "sell_avg_yesterday": 5.4,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 10,
@@ -1252,8 +1252,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 10.983333333333334,
-        "sell_avg_24h": 5.5
+        "buy_avg_24h": 10.2,
+        "sell_avg_24h": 5.4
       },
       {
         "item_name": "精炼飞掠催化剂",
@@ -1535,7 +1535,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AbyssalEyeSocketables/UlamansGaze.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 5.166666666666667,
+        "buy_avg_yesterday": 5,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -1550,7 +1550,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 5.166666666666667,
+        "buy_avg_24h": 5,
         "sell_avg_24h": 0
       },
       {
@@ -1559,7 +1559,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AbyssalEyeSocketables/KurgalsGaze.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 2.6666666666666665,
+        "buy_avg_yesterday": 2,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -1574,7 +1574,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 2.6666666666666665,
+        "buy_avg_24h": 2,
         "sell_avg_24h": 0
       },
       {
@@ -1607,7 +1607,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/AbyssalEyeSocketables/TecrodsGaze.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 12.333333333333334,
+        "buy_avg_yesterday": 12.2,
         "sell_avg_yesterday": 11,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -1622,7 +1622,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 12.333333333333334,
+        "buy_avg_24h": 12.2,
         "sell_avg_24h": 11
       }
     ]
@@ -1684,7 +1684,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/Alloy4.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 1.4949999999999999,
+        "buy_avg_yesterday": 1.394,
         "sell_avg_yesterday": 0.5,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -1699,7 +1699,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 1.4949999999999999,
+        "buy_avg_24h": 1.394,
         "sell_avg_24h": 0.5
       },
       {
@@ -2025,8 +2025,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PerfectSoulCores/SoulCoreSoul.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 252,
-        "sell_avg_yesterday": 145,
+        "buy_avg_yesterday": 253.4,
+        "sell_avg_yesterday": 146,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 259,
@@ -2040,8 +2040,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 252,
-        "sell_avg_24h": 145
+        "buy_avg_24h": 253.4,
+        "sell_avg_24h": 146
       },
       {
         "item_name": "奇塔夸雷特的圣典",
@@ -2073,7 +2073,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PerfectSoulCores/SoulCoreScience.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 18.833333333333332,
+        "buy_avg_yesterday": 18.8,
         "sell_avg_yesterday": 3,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -2088,7 +2088,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 18.833333333333332,
+        "buy_avg_24h": 18.8,
         "sell_avg_24h": 3
       },
       {
@@ -2126,8 +2126,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionLogbook5.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.135,
-        "sell_avg_yesterday": 0.05666666666666667,
+        "buy_avg_yesterday": 0.138,
+        "sell_avg_yesterday": 0.057999999999999996,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 0.15,
@@ -2141,8 +2141,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.135,
-        "sell_avg_24h": 0.05666666666666667
+        "buy_avg_24h": 0.138,
+        "sell_avg_24h": 0.057999999999999996
       },
       {
         "item_name": "危难的命运",
@@ -2150,8 +2150,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/TrialmasterKey2.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 7.283333333333332,
-        "sell_avg_yesterday": 5.6000000000000005,
+        "buy_avg_yesterday": 7.339999999999999,
+        "sell_avg_yesterday": 5.62,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 7.4,
@@ -2165,8 +2165,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 7.283333333333332,
-        "sell_avg_24h": 5.6000000000000005
+        "buy_avg_24h": 7.339999999999999,
+        "sell_avg_24h": 5.62
       },
       {
         "item_name": "君王之颅",
@@ -2174,7 +2174,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/KingoftheMistHead.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.7533333333333334,
+        "buy_avg_yesterday": 0.7700000000000001,
         "sell_avg_yesterday": 0.5,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -2189,7 +2189,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.7533333333333334,
+        "buy_avg_24h": 0.7700000000000001,
         "sell_avg_24h": 0.5
       },
       {
@@ -2198,8 +2198,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/TrialmasterKey1.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 5.716666666666666,
-        "sell_avg_yesterday": 4.816666666666667,
+        "buy_avg_yesterday": 5.7,
+        "sell_avg_yesterday": 4.82,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 5.9,
@@ -2213,8 +2213,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 5.716666666666666,
-        "sell_avg_24h": 4.816666666666667
+        "buy_avg_24h": 5.7,
+        "sell_avg_24h": 4.82
       },
       {
         "item_name": "暗影呼唤",
@@ -2246,8 +2246,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Maps/LabyrinthHarvest.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 2.9633333333333334,
-        "sell_avg_yesterday": 2.766666666666667,
+        "buy_avg_yesterday": 2.9560000000000004,
+        "sell_avg_yesterday": 2.7800000000000002,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 2.96,
@@ -2261,8 +2261,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 2.9633333333333334,
-        "sell_avg_24h": 2.766666666666667
+        "buy_avg_24h": 2.9560000000000004,
+        "sell_avg_24h": 2.7800000000000002
       },
       {
         "item_name": "梦魇拟像裂片",
@@ -2295,7 +2295,7 @@
         "buy_avg": 0,
         "sell_avg": 0,
         "buy_avg_yesterday": 5.8,
-        "sell_avg_yesterday": 4.891666666666667,
+        "sell_avg_yesterday": 4.87,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 5.9,
@@ -2310,7 +2310,7 @@
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
         "buy_avg_24h": 5.8,
-        "sell_avg_24h": 4.891666666666667
+        "sell_avg_24h": 4.87
       },
       {
         "item_name": "裂隙石",
@@ -2366,7 +2366,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/QuestItems/PinnacleKey2.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 7.25,
+        "buy_avg_yesterday": 7.3,
         "sell_avg_yesterday": 6.5,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -2381,7 +2381,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 7.25,
+        "buy_avg_24h": 7.3,
         "sell_avg_24h": 6.5
       },
       {
@@ -2390,8 +2390,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/VoodooKingEffigy.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.16333333333333336,
-        "sell_avg_yesterday": 0.06999999999999999,
+        "buy_avg_yesterday": 0.17600000000000002,
+        "sell_avg_yesterday": 0.07500000000000001,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 0.17,
@@ -2405,8 +2405,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.16333333333333336,
-        "sell_avg_24h": 0.06999999999999999
+        "buy_avg_24h": 0.17600000000000002,
+        "sell_avg_24h": 0.07500000000000001
       },
       {
         "item_name": "起源摇篮",
@@ -2462,7 +2462,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/PrecursorSeed.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 2.2116666666666664,
+        "buy_avg_yesterday": 2.214,
         "sell_avg_yesterday": 2.1,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -2477,7 +2477,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 2.2116666666666664,
+        "buy_avg_24h": 2.214,
         "sell_avg_24h": 2.1
       },
       {
@@ -2712,7 +2712,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/UniqueBeastEmotion.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 1.9566666666666668,
+        "buy_avg_yesterday": 1.954,
         "sell_avg_yesterday": 1,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -2727,7 +2727,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 1.9566666666666668,
+        "buy_avg_24h": 1.954,
         "sell_avg_24h": 1
       },
       {
@@ -2736,7 +2736,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/ConcentratedDistilledIsolation.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 1.4500000000000002,
+        "buy_avg_yesterday": 1.4400000000000002,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -2751,7 +2751,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 1.4500000000000002,
+        "buy_avg_24h": 1.4400000000000002,
         "sell_avg_24h": 0
       },
       {
@@ -3024,8 +3024,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/DistilledEmotions/TimelessUniqueBeastEmotion.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 4.195,
-        "sell_avg_yesterday": 3.5500000000000003,
+        "buy_avg_yesterday": 4.234,
+        "sell_avg_yesterday": 3.56,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 3.67,
@@ -3039,8 +3039,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 4.195,
-        "sell_avg_24h": 3.5500000000000003
+        "buy_avg_24h": 4.234,
+        "sell_avg_24h": 3.56
       },
       {
         "item_name": "远古浓缩的液化孤独",
@@ -3294,7 +3294,7 @@
         "buy_avg": 0,
         "sell_avg": 0,
         "buy_avg_yesterday": 4,
-        "sell_avg_yesterday": 2.5500000000000003,
+        "sell_avg_yesterday": 2.6399999999999997,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 4,
@@ -3309,7 +3309,7 @@
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
         "buy_avg_24h": 4,
-        "sell_avg_24h": 2.5500000000000003
+        "sell_avg_24h": 2.6399999999999997
       },
       {
         "item_name": "啃噬肋骨",
@@ -3389,12 +3389,12 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/AncientRibs.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 3.5383333333333336,
-        "sell_avg_yesterday": 215,
+        "buy_avg_yesterday": 3.5460000000000003,
+        "sell_avg_yesterday": 219.75,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 3.8,
-        "latest_sell1": 210,
+        "latest_sell1": 221.25,
         "latest_datetime": "2026-11-26 08:00:00",
         "prev_buy1": 3,
         "prev_buy1_datetime": "2026-11-26 07:00:00",
@@ -3404,8 +3404,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 3.5383333333333336,
-        "sell_avg_24h": 215
+        "buy_avg_24h": 3.5460000000000003,
+        "sell_avg_24h": 219.75
       },
       {
         "item_name": "远古锁骨",
@@ -3413,8 +3413,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/AncientClavicle.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 4.833333333333333,
-        "sell_avg_yesterday": 3.668333333333333,
+        "buy_avg_yesterday": 4.8,
+        "sell_avg_yesterday": 3.6019999999999994,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 5,
@@ -3428,8 +3428,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 4.833333333333333,
-        "sell_avg_24h": 3.668333333333333
+        "buy_avg_24h": 4.8,
+        "sell_avg_24h": 3.6019999999999994
       },
       {
         "item_name": "远古颚骨",
@@ -3437,12 +3437,12 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/AncientJawbone.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 2.651666666666667,
-        "sell_avg_yesterday": 1.9583333333333333,
+        "buy_avg_yesterday": 2.682,
+        "sell_avg_yesterday": 186.01875,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 2.67,
-        "latest_sell1": 2,
+        "latest_sell1": 225,
         "latest_datetime": "2026-11-26 08:00:00",
         "prev_buy1": 2.67,
         "prev_buy1_datetime": "2026-11-26 07:00:00",
@@ -3452,8 +3452,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 2.651666666666667,
-        "sell_avg_24h": 1.9583333333333333
+        "buy_avg_24h": 2.682,
+        "sell_avg_24h": 186.01875
       },
       {
         "item_name": "遗存头骨",
@@ -3461,8 +3461,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Abyss/PreservedCranium.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 39.333333333333336,
-        "sell_avg_yesterday": 35.833333333333336,
+        "buy_avg_yesterday": 39.4,
+        "sell_avg_yesterday": 35.6,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 39,
@@ -3476,8 +3476,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 39.333333333333336,
-        "sell_avg_24h": 35.833333333333336
+        "buy_avg_24h": 39.4,
+        "sell_avg_24h": 35.6
       },
       {
         "item_name": "遗存椎骨",
@@ -3586,8 +3586,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Delirium/DeliriumEndgameSocketable.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 126.16666666666667,
-        "sell_avg_yesterday": 113.83333333333333,
+        "buy_avg_yesterday": 126.4,
+        "sell_avg_yesterday": 113.2,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 125,
@@ -3601,8 +3601,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 126.16666666666667,
-        "sell_avg_24h": 113.83333333333333
+        "buy_avg_24h": 126.4,
+        "sell_avg_24h": 113.2
       }
     ]
   },
@@ -3639,8 +3639,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionGemCurrencyPowerful.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 35.75,
-        "sell_avg_yesterday": 26,
+        "buy_avg_yesterday": 36.1,
+        "sell_avg_yesterday": 25.8,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 35,
@@ -3654,8 +3654,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 35.75,
-        "sell_avg_24h": 26
+        "buy_avg_24h": 36.1,
+        "sell_avg_24h": 25.8
       },
       {
         "item_name": "炽焰溶剂",
@@ -4484,7 +4484,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/SoulCores/GreaterSoulCoreDex.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.88,
+        "buy_avg_yesterday": 0.8800000000000001,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -4499,7 +4499,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.88,
+        "buy_avg_24h": 0.8800000000000001,
         "sell_avg_24h": 0
       },
       {
@@ -4897,7 +4897,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionGreaterVaalOrb.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 13.916666666666666,
+        "buy_avg_yesterday": 14,
         "sell_avg_yesterday": 12,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -4912,7 +4912,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 13.916666666666666,
+        "buy_avg_24h": 14,
         "sell_avg_24h": 12
       },
       {
@@ -4945,7 +4945,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/VaalCatalyst.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 4.12,
+        "buy_avg_yesterday": 4.144,
         "sell_avg_yesterday": 3.6,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -4960,7 +4960,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 4.12,
+        "buy_avg_24h": 4.144,
         "sell_avg_24h": 3.6
       },
       {
@@ -4969,8 +4969,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionHistoricVaalOrb.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 2.7883333333333336,
-        "sell_avg_yesterday": 2.1999999999999997,
+        "buy_avg_yesterday": 2.766,
+        "sell_avg_yesterday": 2.2,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 3,
@@ -4984,8 +4984,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 2.7883333333333336,
-        "sell_avg_24h": 2.1999999999999997
+        "buy_avg_24h": 2.766,
+        "sell_avg_24h": 2.2
       },
       {
         "item_name": "瓦尔护甲师注能装置",
@@ -5089,8 +5089,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/IncursionCraftingOrbs/IncursionCrystallisedCorruption.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 9.75,
-        "sell_avg_yesterday": 8.166666666666666,
+        "buy_avg_yesterday": 9.7,
+        "sell_avg_yesterday": 8,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 9.5,
@@ -5104,8 +5104,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 9.75,
-        "sell_avg_24h": 8.166666666666666
+        "buy_avg_24h": 9.7,
+        "sell_avg_24h": 8
       },
       {
         "item_name": "萃取石",
@@ -5219,7 +5219,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune11.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 22.4,
+        "buy_avg_yesterday": 23,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5234,7 +5234,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 22.4,
+        "buy_avg_24h": 23,
         "sell_avg_24h": 0
       },
       {
@@ -5315,7 +5315,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneDex.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.7,
+        "buy_avg_yesterday": 0.6985714285714285,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5330,7 +5330,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.7,
+        "buy_avg_24h": 0.6985714285714285,
         "sell_avg_24h": 0
       },
       {
@@ -5387,7 +5387,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard8.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 24,
+        "buy_avg_yesterday": 27,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5402,7 +5402,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 24,
+        "buy_avg_24h": 27,
         "sell_avg_24h": 0
       },
       {
@@ -5555,7 +5555,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRune3.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 1.2875,
+        "buy_avg_yesterday": 1.2714285714285716,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5570,7 +5570,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 1.2875,
+        "buy_avg_24h": 1.2714285714285716,
         "sell_avg_24h": 0
       },
       {
@@ -5579,7 +5579,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune15.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 135.4,
+        "buy_avg_yesterday": 136.75,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5594,7 +5594,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 135.4,
+        "buy_avg_24h": 136.75,
         "sell_avg_24h": 0
       },
       {
@@ -5747,7 +5747,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/UpgradeRune.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 999.8,
+        "buy_avg_yesterday": 1000,
         "sell_avg_yesterday": 221,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5762,7 +5762,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 999.8,
+        "buy_avg_24h": 1000,
         "sell_avg_24h": 221
       },
       {
@@ -5819,7 +5819,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ElementalConversionRuneFire.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 46,
+        "buy_avg_yesterday": 45,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5834,7 +5834,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 46,
+        "buy_avg_24h": 45,
         "sell_avg_24h": 0
       },
       {
@@ -5867,8 +5867,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRuneUnique.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 252.125,
-        "sell_avg_yesterday": 220.875,
+        "buy_avg_yesterday": 252.42857142857142,
+        "sell_avg_yesterday": 221.57142857142858,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 259,
@@ -5882,8 +5882,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 252.125,
-        "sell_avg_24h": 220.875
+        "buy_avg_24h": 252.42857142857142,
+        "sell_avg_24h": 221.57142857142858
       },
       {
         "item_name": "女巫阿桑德拉的智慧符文",
@@ -5915,7 +5915,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneStrength.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 4.642,
+        "buy_avg_yesterday": 4.635,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5930,7 +5930,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 4.642,
+        "buy_avg_24h": 4.635,
         "sell_avg_24h": 0
       },
       {
@@ -5963,7 +5963,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneCold.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 2.9200000000000004,
+        "buy_avg_yesterday": 2.9250000000000003,
         "sell_avg_yesterday": 0.33,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -5978,7 +5978,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 2.9200000000000004,
+        "buy_avg_24h": 2.9250000000000003,
         "sell_avg_24h": 0.33
       },
       {
@@ -6011,7 +6011,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneIntelligence.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 5.92,
+        "buy_avg_yesterday": 5.9,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6026,7 +6026,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 5.92,
+        "buy_avg_24h": 5.9,
         "sell_avg_24h": 0
       },
       {
@@ -6035,7 +6035,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneAccuracy.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 3.9200000000000004,
+        "buy_avg_yesterday": 3.9000000000000004,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6050,7 +6050,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 3.9200000000000004,
+        "buy_avg_24h": 3.9000000000000004,
         "sell_avg_24h": 0
       },
       {
@@ -6059,14 +6059,14 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneManaRecovery.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 322.45,
+        "buy_avg_yesterday": 3.45,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
-        "latest_buy1": 390,
+        "latest_buy1": 2.9,
         "latest_sell1": 0,
         "latest_datetime": "2026-11-26 08:00:00",
-        "prev_buy1": 390,
+        "prev_buy1": 2.9,
         "prev_buy1_datetime": "2026-11-26 07:00:00",
         "error": false,
         "error_info": "",
@@ -6074,7 +6074,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 322.45,
+        "buy_avg_24h": 3.45,
         "sell_avg_24h": 0
       },
       {
@@ -6083,14 +6083,14 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneFire.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 322.45,
+        "buy_avg_yesterday": 3.45,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
-        "latest_buy1": 390,
+        "latest_buy1": 2.9,
         "latest_sell1": 0,
         "latest_datetime": "2026-11-26 08:00:00",
-        "prev_buy1": 390,
+        "prev_buy1": 2.9,
         "prev_buy1_datetime": "2026-11-26 07:00:00",
         "error": false,
         "error_info": "",
@@ -6098,7 +6098,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 322.45,
+        "buy_avg_24h": 3.45,
         "sell_avg_24h": 0
       },
       {
@@ -6131,7 +6131,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/AddedWardPerfect.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 8.680000000000001,
+        "buy_avg_yesterday": 8.725000000000001,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6146,7 +6146,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 8.680000000000001,
+        "buy_avg_24h": 8.725000000000001,
         "sell_avg_24h": 0
       },
       {
@@ -6179,7 +6179,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneLife.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 5.92,
+        "buy_avg_yesterday": 5.9,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6194,7 +6194,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 5.92,
+        "buy_avg_24h": 5.9,
         "sell_avg_24h": 0
       },
       {
@@ -6227,14 +6227,14 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneEnhance.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 322.45,
-        "sell_avg_yesterday": 0.95,
+        "buy_avg_yesterday": 3.45,
+        "sell_avg_yesterday": 1.0625,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
-        "latest_buy1": 390,
+        "latest_buy1": 2.9,
         "latest_sell1": 1.25,
         "latest_datetime": "2026-11-26 08:00:00",
-        "prev_buy1": 390,
+        "prev_buy1": 2.9,
         "prev_buy1_datetime": "2026-11-26 07:00:00",
         "error": false,
         "error_info": "",
@@ -6242,8 +6242,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 322.45,
-        "sell_avg_24h": 0.95
+        "buy_avg_24h": 3.45,
+        "sell_avg_24h": 1.0625
       },
       {
         "item_name": "完美风暴符文",
@@ -6251,14 +6251,14 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/PerfectRuneLightning.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 322.45,
+        "buy_avg_yesterday": 3.45,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
-        "latest_buy1": 390,
+        "latest_buy1": 2.9,
         "latest_sell1": 0,
         "latest_datetime": "2026-11-26 08:00:00",
-        "prev_buy1": 390,
+        "prev_buy1": 2.9,
         "prev_buy1_datetime": "2026-11-26 07:00:00",
         "error": false,
         "error_info": "",
@@ -6266,31 +6266,31 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 322.45,
+        "buy_avg_24h": 3.45,
         "sell_avg_24h": 0
       },
       {
         "item_name": "巅峰符文",
         "engname": "Rune of Culmination",
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune4.webp",
-        "buy_avg": 0,
+        "buy_avg": 123.33333333333333,
         "sell_avg": 0,
-        "buy_avg_yesterday": 200,
+        "buy_avg_yesterday": 102.5,
         "sell_avg_yesterday": 0,
-        "buy_avg_ratio": null,
+        "buy_avg_ratio": 20.33,
         "sell_avg_ratio": null,
         "latest_buy1": 200,
         "latest_sell1": 0,
         "latest_datetime": "2026-11-25 21:00:00",
-        "prev_buy1": 0,
-        "prev_buy1_datetime": "",
-        "error": false,
-        "error_info": "",
+        "prev_buy1": 200,
+        "prev_buy1_datetime": "2026-11-25 12:00:00",
+        "error": true,
+        "error_info": "数据已过时超过24h",
         "currency_unit": "e",
         "anomaly_count": 0,
-        "buy_avg_12h": 0,
+        "buy_avg_12h": 123.33333333333333,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 200,
+        "buy_avg_24h": 102.5,
         "sell_avg_24h": 0
       },
       {
@@ -6321,25 +6321,25 @@
         "item_name": "巨狼之意志符文",
         "engname": "The Greatwolf's Rune of Willpower",
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune21.webp",
-        "buy_avg": 0,
-        "sell_avg": 0,
-        "buy_avg_yesterday": 10,
-        "sell_avg_yesterday": 0.03,
-        "buy_avg_ratio": null,
-        "sell_avg_ratio": null,
+        "buy_avg": 20,
+        "sell_avg": 0.03000000000000001,
+        "buy_avg_yesterday": 20.25,
+        "sell_avg_yesterday": 0.030000000000000016,
+        "buy_avg_ratio": -1.23,
+        "sell_avg_ratio": 0,
         "latest_buy1": 10,
         "latest_sell1": 0.03,
         "latest_datetime": "2026-11-25 21:00:00",
-        "prev_buy1": 0,
-        "prev_buy1_datetime": "",
-        "error": false,
-        "error_info": "",
+        "prev_buy1": 10,
+        "prev_buy1_datetime": "2026-11-25 12:00:00",
+        "error": true,
+        "error_info": "数据已过时超过24h",
         "currency_unit": "e",
         "anomaly_count": 0,
-        "buy_avg_12h": 0,
-        "sell_avg_12h": 0,
-        "buy_avg_24h": 10,
-        "sell_avg_24h": 0.03
+        "buy_avg_12h": 20,
+        "sell_avg_12h": 0.03000000000000001,
+        "buy_avg_24h": 20.25,
+        "sell_avg_24h": 0.030000000000000016
       },
       {
         "item_name": "巩固之结界符文",
@@ -6354,8 +6354,8 @@
         "latest_buy1": 10,
         "latest_sell1": 0,
         "latest_datetime": "2026-11-25 23:00:00",
-        "prev_buy1": 10,
-        "prev_buy1_datetime": "2026-11-25 21:00:00",
+        "prev_buy1": 0,
+        "prev_buy1_datetime": "",
         "error": false,
         "error_info": "",
         "currency_unit": "e",
@@ -6659,8 +6659,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionScienceAncientAugment.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 38.2,
-        "sell_avg_yesterday": 11.2,
+        "buy_avg_yesterday": 38,
+        "sell_avg_yesterday": 11.5,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 38,
@@ -6674,8 +6674,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 38.2,
-        "sell_avg_24h": 11.2
+        "buy_avg_24h": 38,
+        "sell_avg_24h": 11.5
       },
       {
         "item_name": "新生本能",
@@ -6683,7 +6683,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionWarAncientAugment.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 4.9159999999999995,
+        "buy_avg_yesterday": 4.895,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6698,7 +6698,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 4.9159999999999995,
+        "buy_avg_24h": 4.895,
         "sell_avg_24h": 0
       },
       {
@@ -6707,7 +6707,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/ExpeditionReligionAncientAugment.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 40.8,
+        "buy_avg_yesterday": 40.5,
         "sell_avg_yesterday": 3,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6722,7 +6722,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 40.8,
+        "buy_avg_24h": 40.5,
         "sell_avg_24h": 3
       },
       {
@@ -6779,7 +6779,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune7.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 43.8,
+        "buy_avg_yesterday": 44.25,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6794,7 +6794,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 43.8,
+        "buy_avg_24h": 44.25,
         "sell_avg_24h": 0
       },
       {
@@ -6803,7 +6803,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune12.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 290,
+        "buy_avg_yesterday": 300,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -6818,7 +6818,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 290,
+        "buy_avg_24h": 300,
         "sell_avg_24h": 0
       },
       {
@@ -6947,14 +6947,14 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune9.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 80,
+        "buy_avg_yesterday": 8,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
-        "latest_buy1": 80,
+        "latest_buy1": 8,
         "latest_sell1": 0,
         "latest_datetime": "2026-11-26 08:00:00",
-        "prev_buy1": 80,
+        "prev_buy1": 8,
         "prev_buy1_datetime": "2026-11-26 07:00:00",
         "error": false,
         "error_info": "",
@@ -6962,7 +6962,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 80,
+        "buy_avg_24h": 8,
         "sell_avg_24h": 0
       },
       {
@@ -7091,7 +7091,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EarlyMythicRune2.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 529.6,
+        "buy_avg_yesterday": 537.25,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7106,7 +7106,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 529.6,
+        "buy_avg_24h": 537.25,
         "sell_avg_24h": 0
       },
       {
@@ -7115,7 +7115,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRune2.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 2.1,
+        "buy_avg_yesterday": 2.125,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7130,7 +7130,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 2.1,
+        "buy_avg_24h": 2.125,
         "sell_avg_24h": 0
       },
       {
@@ -7139,7 +7139,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard9.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 54,
+        "buy_avg_yesterday": 55,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7154,7 +7154,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 54,
+        "buy_avg_24h": 55,
         "sell_avg_24h": 0
       },
       {
@@ -7187,7 +7187,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard19.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 12,
+        "buy_avg_yesterday": 10,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7202,7 +7202,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 12,
+        "buy_avg_24h": 10,
         "sell_avg_24h": 0
       },
       {
@@ -7211,7 +7211,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/RunicWard13.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 155,
+        "buy_avg_yesterday": 158.75,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7226,7 +7226,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 155,
+        "buy_avg_24h": 158.75,
         "sell_avg_24h": 0
       },
       {
@@ -7235,7 +7235,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/EndgameRune1.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 69.4,
+        "buy_avg_yesterday": 69.25,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7250,7 +7250,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 69.4,
+        "buy_avg_24h": 69.25,
         "sell_avg_24h": 0
       },
       {
@@ -7475,7 +7475,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune8.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 37,
+        "buy_avg_yesterday": 33.75,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7490,7 +7490,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 37,
+        "buy_avg_24h": 33.75,
         "sell_avg_24h": 0
       },
       {
@@ -7571,7 +7571,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune16.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 19,
+        "buy_avg_yesterday": 19.5,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7586,7 +7586,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 19,
+        "buy_avg_24h": 19.5,
         "sell_avg_24h": 0
       },
       {
@@ -7595,22 +7595,22 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune3.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 174.5,
+        "buy_avg_yesterday": 250,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 250,
         "latest_sell1": 0,
         "latest_datetime": "2026-11-25 23:00:00",
-        "prev_buy1": 99,
-        "prev_buy1_datetime": "2026-11-25 21:00:00",
-        "error": true,
-        "error_info": "价格出现剧烈波动, 可能为OCR识别故障",
+        "prev_buy1": 0,
+        "prev_buy1_datetime": "",
+        "error": false,
+        "error_info": "",
         "currency_unit": "e",
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 174.5,
+        "buy_avg_24h": 250,
         "sell_avg_24h": 0
       },
       {
@@ -7619,7 +7619,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune15.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 95.8,
+        "buy_avg_yesterday": 95,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7634,7 +7634,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 95.8,
+        "buy_avg_24h": 95,
         "sell_avg_24h": 0
       },
       {
@@ -7811,7 +7811,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/GameWarpRune1.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 1.6,
+        "buy_avg_yesterday": 1.75,
         "sell_avg_yesterday": 0.1,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7826,7 +7826,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 1.6,
+        "buy_avg_24h": 1.75,
         "sell_avg_24h": 0.1
       },
       {
@@ -7835,7 +7835,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune19.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 158,
+        "buy_avg_yesterday": 161.25,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -7850,7 +7850,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 158,
+        "buy_avg_24h": 161.25,
         "sell_avg_24h": 0
       },
       {
@@ -8339,7 +8339,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Runes/NewRune17.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 6.8,
+        "buy_avg_yesterday": 7,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -8354,7 +8354,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 6.8,
+        "buy_avg_24h": 7,
         "sell_avg_24h": 0
       }
     ]
@@ -9544,8 +9544,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Essence/CorruptedEssenceHysteria.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.7250000000000001,
-        "sell_avg_yesterday": 0.45,
+        "buy_avg_yesterday": 0.7280000000000001,
+        "sell_avg_yesterday": 0.45999999999999996,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 0.74,
@@ -9559,8 +9559,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.7250000000000001,
-        "sell_avg_24h": 0.45
+        "buy_avg_24h": 0.7280000000000001,
+        "sell_avg_24h": 0.45999999999999996
       },
       {
         "item_name": "深渊精华",
@@ -9885,8 +9885,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageUulNetol.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 569,
-        "sell_avg_yesterday": 516.6,
+        "buy_avg_yesterday": 566.5,
+        "sell_avg_yesterday": 508,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 570,
@@ -9900,8 +9900,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 569,
-        "sell_avg_24h": 516.6
+        "buy_avg_24h": 566.5,
+        "sell_avg_24h": 508
       },
       {
         "item_name": "乌崔德仪式",
@@ -9933,8 +9933,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageUhtredLesser.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 259.2,
-        "sell_avg_yesterday": 193.4,
+        "buy_avg_yesterday": 259,
+        "sell_avg_yesterday": 191.25,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 259,
@@ -9948,8 +9948,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 259.2,
-        "sell_avg_24h": 193.4
+        "buy_avg_24h": 259,
+        "sell_avg_24h": 191.25
       },
       {
         "item_name": "乌崔德的占卜",
@@ -9957,8 +9957,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageUhtredGreater.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 127.6,
-        "sell_avg_yesterday": 97.66666666666667,
+        "buy_avg_yesterday": 124.75,
+        "sell_avg_yesterday": 99,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 95,
@@ -9972,8 +9972,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 127.6,
-        "sell_avg_24h": 97.66666666666667
+        "buy_avg_24h": 124.75,
+        "sell_avg_24h": 99
       },
       {
         "item_name": "乌崔德的星图",
@@ -9981,7 +9981,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/UhtredsConstellation.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 102,
+        "buy_avg_yesterday": 105,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -9996,7 +9996,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 102,
+        "buy_avg_24h": 105,
         "sell_avg_24h": 0
       },
       {
@@ -10101,7 +10101,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/ScaleofEonyr.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 192,
+        "buy_avg_yesterday": 195,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10116,7 +10116,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 192,
+        "buy_avg_24h": 195,
         "sell_avg_24h": 0
       },
       {
@@ -10245,7 +10245,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageArmourBreak.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 40.6,
+        "buy_avg_yesterday": 40.75,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10260,7 +10260,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 40.6,
+        "buy_avg_24h": 40.75,
         "sell_avg_24h": 0
       },
       {
@@ -10293,7 +10293,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/AbyssKurgal.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 658,
+        "buy_avg_yesterday": 655,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10308,7 +10308,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 658,
+        "buy_avg_24h": 655,
         "sell_avg_24h": 0
       },
       {
@@ -10437,7 +10437,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/WalkeroftheWilds.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 27,
+        "buy_avg_yesterday": 26.75,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10452,7 +10452,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 27,
+        "buy_avg_24h": 26.75,
         "sell_avg_24h": 0
       },
       {
@@ -10461,8 +10461,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/MothersDeclaration.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 311.2,
-        "sell_avg_yesterday": 239.8,
+        "buy_avg_yesterday": 314.25,
+        "sell_avg_yesterday": 238.25,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 319,
@@ -10476,8 +10476,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 311.2,
-        "sell_avg_24h": 239.8
+        "buy_avg_24h": 314.25,
+        "sell_avg_24h": 238.25
       },
       {
         "item_name": "巴蒂尔的复仇",
@@ -10557,7 +10557,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageKulemakSpire.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.8,
+        "buy_avg_yesterday": 0.875,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10572,7 +10572,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.8,
+        "buy_avg_24h": 0.875,
         "sell_avg_24h": 0
       },
       {
@@ -10605,7 +10605,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/VruunsSpike.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 5.4,
+        "buy_avg_yesterday": 5,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10620,7 +10620,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 5.4,
+        "buy_avg_24h": 5,
         "sell_avg_24h": 0
       },
       {
@@ -10725,8 +10725,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageTul.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 242.71428571428572,
-        "sell_avg_yesterday": 172.28571428571428,
+        "buy_avg_yesterday": 240.83333333333334,
+        "sell_avg_yesterday": 172.5,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 200,
@@ -10740,8 +10740,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 242.71428571428572,
-        "sell_avg_24h": 172.28571428571428
+        "buy_avg_24h": 240.83333333333334,
+        "sell_avg_24h": 172.5
       },
       {
         "item_name": "托沃的雪崩",
@@ -10773,8 +10773,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Rakiata.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 151,
-        "sell_avg_yesterday": 118.85714285714286,
+        "buy_avg_yesterday": 150.5,
+        "sell_avg_yesterday": 119.33333333333333,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 140,
@@ -10788,8 +10788,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 151,
-        "sell_avg_24h": 118.85714285714286
+        "buy_avg_24h": 150.5,
+        "sell_avg_24h": 119.33333333333333
       },
       {
         "item_name": "拉莎的突袭",
@@ -10821,7 +10821,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/KnightsFerocity.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 285,
+        "buy_avg_yesterday": 284,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10836,7 +10836,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 285,
+        "buy_avg_24h": 284,
         "sell_avg_24h": 0
       },
       {
@@ -10869,8 +10869,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Garukhan.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 488.42857142857144,
-        "sell_avg_yesterday": 398.2857142857143,
+        "buy_avg_yesterday": 486.6666666666667,
+        "sell_avg_yesterday": 401.1666666666667,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 484,
@@ -10884,8 +10884,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 488.42857142857144,
-        "sell_avg_24h": 398.2857142857143
+        "buy_avg_24h": 486.6666666666667,
+        "sell_avg_24h": 401.1666666666667
       },
       {
         "item_name": "梅德维德的砍伐",
@@ -10917,8 +10917,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/OlrothsConviction.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 92.71428571428571,
-        "sell_avg_yesterday": 32.57142857142857,
+        "buy_avg_yesterday": 93.5,
+        "sell_avg_yesterday": 34.5,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 100,
@@ -10932,8 +10932,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 92.71428571428571,
-        "sell_avg_24h": 32.57142857142857
+        "buy_avg_24h": 93.5,
+        "sell_avg_24h": 34.5
       },
       {
         "item_name": "欧罗什的傲慢",
@@ -10965,7 +10965,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/TrickstersShard.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 25,
+        "buy_avg_yesterday": 24,
         "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -10980,7 +10980,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 25,
+        "buy_avg_24h": 24,
         "sell_avg_24h": 0
       },
       {
@@ -11013,8 +11013,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/VoranasSiege.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 43,
-        "sell_avg_yesterday": 4.285714285714286,
+        "buy_avg_yesterday": 47.666666666666664,
+        "sell_avg_yesterday": 4,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 66,
@@ -11028,8 +11028,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 43,
-        "sell_avg_24h": 4.285714285714286
+        "buy_avg_24h": 47.666666666666664,
+        "sell_avg_24h": 4
       },
       {
         "item_name": "泽佛伊的恶名",
@@ -11085,8 +11085,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/SeraphsHeart.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 229.57142857142858,
-        "sell_avg_yesterday": 117.57142857142857,
+        "buy_avg_yesterday": 225,
+        "sell_avg_yesterday": 111.16666666666667,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 195,
@@ -11100,8 +11100,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 229.57142857142858,
-        "sell_avg_24h": 117.57142857142857
+        "buy_avg_24h": 225,
+        "sell_avg_24h": 111.16666666666667
       },
       {
         "item_name": "特克罗的复仇",
@@ -11109,7 +11109,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageTecrod.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 7,
+        "buy_avg_yesterday": 7.166666666666667,
         "sell_avg_yesterday": 1,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -11124,7 +11124,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 7,
+        "buy_avg_24h": 7.166666666666667,
         "sell_avg_24h": 1
       },
       {
@@ -11133,8 +11133,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Rigwald.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 193.14285714285714,
-        "sell_avg_yesterday": 160.5,
+        "buy_avg_yesterday": 193,
+        "sell_avg_yesterday": 162.4,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 195,
@@ -11148,8 +11148,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 193.14285714285714,
-        "sell_avg_24h": 160.5
+        "buy_avg_24h": 193,
+        "sell_avg_24h": 162.4
       },
       {
         "item_name": "瓜铁雷兹的消融",
@@ -11301,8 +11301,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/LineageEsh.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 209.16666666666666,
-        "sell_avg_yesterday": 37.333333333333336,
+        "buy_avg_yesterday": 205,
+        "sell_avg_yesterday": 36.4,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 199,
@@ -11316,8 +11316,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 209.16666666666666,
-        "sell_avg_24h": 37.333333333333336
+        "buy_avg_24h": 205,
+        "sell_avg_24h": 36.4
       },
       {
         "item_name": "艾许的骁勇",
@@ -11421,7 +11421,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/BreachlordsRemorse.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 52,
+        "buy_avg_yesterday": 51.6,
         "sell_avg_yesterday": 27,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -11436,7 +11436,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 52,
+        "buy_avg_24h": 51.6,
         "sell_avg_24h": 27
       },
       {
@@ -11541,8 +11541,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/Dialla.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 96.66666666666667,
-        "sell_avg_yesterday": 62.666666666666664,
+        "buy_avg_yesterday": 97.6,
+        "sell_avg_yesterday": 64.6,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 100,
@@ -11556,8 +11556,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 96.66666666666667,
-        "sell_avg_24h": 62.666666666666664
+        "buy_avg_24h": 97.6,
+        "sell_avg_24h": 64.6
       },
       {
         "item_name": "阿兹里的圣礼",
@@ -11565,8 +11565,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Gems/New/NewSupport/Lineage/AtziriCommunion.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 308,
-        "sell_avg_yesterday": 279.8333333333333,
+        "buy_avg_yesterday": 306.8,
+        "sell_avg_yesterday": 280.6,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 300,
@@ -11580,8 +11580,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 308,
-        "sell_avg_24h": 279.8333333333333
+        "buy_avg_24h": 306.8,
+        "sell_avg_24h": 280.6
       },
       {
         "item_name": "阿兹里的焦躁",
@@ -12122,7 +12122,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/TormentedSpiritSocketables/AzmeriSocketableFox.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 3.8333333333333335,
+        "buy_avg_yesterday": 4,
         "sell_avg_yesterday": 2,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -12137,7 +12137,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 3.8333333333333335,
+        "buy_avg_24h": 4,
         "sell_avg_24h": 2
       },
       {
@@ -12434,7 +12434,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/RitualMajesticBeasts.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 647,
+        "buy_avg_yesterday": 648.8,
         "sell_avg_yesterday": 420,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -12449,7 +12449,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 647,
+        "buy_avg_24h": 648.8,
         "sell_avg_24h": 420
       },
       {
@@ -12482,7 +12482,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Ritual/RitualAmbushPredators.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 8.833333333333334,
+        "buy_avg_yesterday": 9,
         "sell_avg_yesterday": 1,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -12497,7 +12497,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 8.833333333333334,
+        "buy_avg_24h": 9,
         "sell_avg_24h": 1
       },
       {
@@ -12535,8 +12535,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Expedition2/SpecialExpeditionPage4.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 1.4866666666666666,
-        "sell_avg_yesterday": 1,
+        "buy_avg_yesterday": 1.384,
+        "sell_avg_yesterday": 0,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 1.75,
@@ -12550,8 +12550,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 1.4866666666666666,
-        "sell_avg_24h": 1
+        "buy_avg_24h": 1.384,
+        "sell_avg_24h": 0
       },
       {
         "item_name": "互换预兆",
@@ -12607,8 +12607,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnAnnulRemoveAbyssMod.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 9.046666666666667,
-        "sell_avg_yesterday": 8.698333333333332,
+        "buy_avg_yesterday": 9.056000000000001,
+        "sell_avg_yesterday": 8.718,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 9,
@@ -12622,8 +12622,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 9.046666666666667,
-        "sell_avg_24h": 8.698333333333332
+        "buy_avg_24h": 9.056000000000001,
+        "sell_avg_24h": 8.718
       },
       {
         "item_name": "右旋剥离预兆",
@@ -12631,8 +12631,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens3Purple.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 13.833333333333334,
-        "sell_avg_yesterday": 12.166666666666666,
+        "buy_avg_yesterday": 13.8,
+        "sell_avg_yesterday": 12.2,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 13,
@@ -12646,8 +12646,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 13.833333333333334,
-        "sell_avg_24h": 12.166666666666666
+        "buy_avg_24h": 13.8,
+        "sell_avg_24h": 12.2
       },
       {
         "item_name": "右旋崇高预兆",
@@ -12703,8 +12703,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens3Dark.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 13.700000000000001,
-        "sell_avg_yesterday": 11,
+        "buy_avg_yesterday": 13.680000000000001,
+        "sell_avg_yesterday": 10.8,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 14,
@@ -12718,8 +12718,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 13.700000000000001,
-        "sell_avg_24h": 11
+        "buy_avg_24h": 13.680000000000001,
+        "sell_avg_24h": 10.8
       },
       {
         "item_name": "右旋结晶预兆",
@@ -12727,7 +12727,7 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnPerfectEssenceSuffix.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 0.23500000000000001,
+        "buy_avg_yesterday": 0.242,
         "sell_avg_yesterday": 0.17,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
@@ -12742,7 +12742,7 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 0.23500000000000001,
+        "buy_avg_24h": 0.242,
         "sell_avg_24h": 0.17
       },
       {
@@ -12823,8 +12823,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Purple.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 19.583333333333332,
-        "sell_avg_yesterday": 17.833333333333332,
+        "buy_avg_yesterday": 19.5,
+        "sell_avg_yesterday": 17.8,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 19,
@@ -12838,8 +12838,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 19.583333333333332,
-        "sell_avg_24h": 17.833333333333332
+        "buy_avg_24h": 19.5,
+        "sell_avg_24h": 17.8
       },
       {
         "item_name": "左旋崇高预兆",
@@ -12895,8 +12895,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens2Dark.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 15.75,
-        "sell_avg_yesterday": 12.5,
+        "buy_avg_yesterday": 15.6,
+        "sell_avg_yesterday": 12,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 16,
@@ -12910,8 +12910,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 15.75,
-        "sell_avg_24h": 12.5
+        "buy_avg_24h": 15.6,
+        "sell_avg_24h": 12
       },
       {
         "item_name": "左旋结晶预兆",
@@ -13039,8 +13039,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/OmenOnChanceNotDestroy.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 8.833333333333334,
-        "sell_avg_yesterday": 7.166666666666667,
+        "buy_avg_yesterday": 8.8,
+        "sell_avg_yesterday": 7,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 8,
@@ -13054,8 +13054,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 8.833333333333334,
-        "sell_avg_24h": 7.166666666666667
+        "buy_avg_24h": 8.8,
+        "sell_avg_24h": 7
       },
       {
         "item_name": "梅德维德之传说",
@@ -13135,8 +13135,8 @@
         "item_icon": "https://cdn.poe2db.tw/image/Art/2DItems/Currency/Omens/VoodooOmens1Dark.webp",
         "buy_avg": 0,
         "sell_avg": 0,
-        "buy_avg_yesterday": 10.735,
-        "sell_avg_yesterday": 9.958333333333334,
+        "buy_avg_yesterday": 10.681999999999999,
+        "sell_avg_yesterday": 9.95,
         "buy_avg_ratio": null,
         "sell_avg_ratio": null,
         "latest_buy1": 10.5,
@@ -13150,8 +13150,8 @@
         "anomaly_count": 0,
         "buy_avg_12h": 0,
         "sell_avg_12h": 0,
-        "buy_avg_24h": 10.735,
-        "sell_avg_24h": 9.958333333333334
+        "buy_avg_24h": 10.681999999999999,
+        "sell_avg_24h": 9.95
       },
       {
         "item_name": "深渊回响预兆",
